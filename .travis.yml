@@ -1,27 +1,27 @@
 branches:
   only:
-  - source
+    - source
 language: ruby
 rvm:
-- 1.9.3
+  - 1.9.3
 before_install:
-- git config --global user.name "Travis CI"
-- git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "travis@travis-ci.org"
 before_script:
-- export REPO_URL="https://$GH_TOKEN@github.com/$GH_REPO.git"
-- rake setup_github_pages[$REPO_URL]
+  - export REPO_URL="https://$GH_TOKEN@github.com/$GH_REPO.git"
+  - rake setup_github_pages[$REPO_URL]
 script:
-- rake generate
+  - rake generate
 after_script:
-- rake deploy
+  - rake deploy
 env:
   # Generate OAuth tokens for travis-ci using bash:
   # $ gem install travis
   # $ curl -u 'trunkclub' -d '{"scopes":["public_repo"], "note":"Travis access"}' https://api.github.com/authorizations
   # $ travis encrypt --add GH_TOKEN=your_token
   global:
-  - GH_REPO="trunkclub/trunkclub.github.io"
-  - secure: Cxa8StZ6z45GfwT1pFUyhYzWlR6qHoRzMwpWVcjeAkOT3ZaR//xZDPidgryY+OpdktP08cb6xb9Fxa7kxnOLuiqn+GSTmQiAA+bj1ylYl/Mvy4gXiyMQywzHW6f9niugNUOvVcbRTzJHA5Mf0KcoipkvypUMkKIXmymuaxGOcSo=
+    - GH_REPO="trunkclub/trunkclub.github.io"
+    - secure: Cxa8StZ6z45GfwT1pFUyhYzWlR6qHoRzMwpWVcjeAkOT3ZaR//xZDPidgryY+OpdktP08cb6xb9Fxa7kxnOLuiqn+GSTmQiAA+bj1ylYl/Mvy4gXiyMQywzHW6f9niugNUOvVcbRTzJHA5Mf0KcoipkvypUMkKIXmymuaxGOcSo=
 prose: 
   rooturl: "source" 
   metadata: 
@@ -32,6 +32,5 @@ prose:
       categories:  
       published: true 
 notifications:
-  campfire:
-    rooms:
-      secure: cWdRIoG8pQAXGcS8xNQvHZdsBy1N1O3ZetuRvlDjlb8PA+cTIOE+gK3S8ehUlUxWv5F+cLstGxVaZnQXdxJgg8gzB6pq2HWbkTn5HlCIXDJs/GmUeN/pwaYcPxYWErKb/GDJrPTlZxqsIu9fITiiMe8VNKs5GfK3fJWTz1U53dM=
+  webhooks:
+    - secure: "Zphx/xk1MpWTp5T/lj1hG71QCTYQLawgEIdZBbsuhGhPJG+Q0PYQ3Ffy6bVHQ+EQAJnKZzRxgQTTj0cWAAUZjST6wDifcDMZSZxRVMUvM2v5WITKLoTRCsjlUt2CTTTVDX1OjA3JqBuQLUrgCFLky0IWq0KTb4A78uDUq22Cjho="
