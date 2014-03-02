@@ -4,7 +4,7 @@ title: Chaplin Collection Views Using CSS Transitions
 date: 2014-03-02 13:43
 comments: true
 categories:
-  - Programming
+  - programming
 author: Josh Habdas
 ---
 
