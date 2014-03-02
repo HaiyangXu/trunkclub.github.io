@@ -14,7 +14,7 @@ One of the downsides with the out-of-the-box Collection Views provided with Chap
 
 After a quick look through [Chaplin.CollectionView](http://docs.chaplinjs.org/chaplin.collection_view.html) I noticed a property called `useCssAnimation`. The default value of this property was set to `false`. Time to search GitHub for some inspiration...
 
-A quick search for `"useCssAnimation:"` resulted in a number of hits. But [one of them](https://github.com/molefrog/steviewhale/blob/0f665a4b77daa2023db5ebf5809c3b54b50d6931/app/views/shot/grid/shotGridView.coffee) in particular caught my eye, because I recognized it was using a library I'd been experimenting called [animate.css](https://github.com/daneden/animate.css). And I knew testing it out would be a cinch.
+A quick search for `"useCssAnimation:"` resulted in a number of hits. But [one of them](https://github.com/molefrog/steviewhale/blob/0f665a4b77daa2023db5ebf5809c3b54b50d6931/app/views/shot/grid/shotGridView.coffee) in particular caught my eye, because I recognized it was using a library I'd been experimenting with called [animate.css](https://github.com/daneden/animate.css). And I knew testing it out would be a cinch.
 
 Given BWP is geared for developer productivity, here's all that was needed to make the switch to use *animate.css* to replace the JS-based `CollectionView` animation behavior:
 
