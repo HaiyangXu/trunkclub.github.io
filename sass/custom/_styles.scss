@@ -1,2 +1,65 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
+// Reset basic background styles
+html {
+  background: #F2F2F2;
+}
+
+// Stylize page header
+body > header {
+  h1 {
+    font-size: 0 !important;
+    img[alt] {
+      height: 17px;
+      width: 162px;
+    }
+  }
+  h2 {
+    font-size: 0.75em;
+    text-transform: uppercase;
+  }
+}
+
+// Change article backgrounds to white
+.blog-index, {
+  article {
+    background: white;
+  }
+}
+
+// Remove the 1px right border
+body>div>div {
+  border-right: none;
+}
+
+// Trick out the pagination on the homepage
+#content div.pagination {
+  background: #F2F2F2;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+// Style individual article
+#content {
+  background: white;
+}
+
+// Make navigation look like the html background
+nav[role="navigation"] {
+  background: #F2F2F2;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: none;
+}
+
+// Allows proper page title, but uses Image logo
+.isHiddenVisually {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+}
