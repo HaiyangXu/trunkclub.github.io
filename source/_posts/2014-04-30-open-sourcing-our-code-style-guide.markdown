@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Open sourcing our code style guide"
+date: 2014-04-30 20:02
+comments: true
+categories:
+  - programming
+author: Josh Habdas
+---
+
+# Open sourcing our code style guide
+
+Over the last we've been adopting and standardizing on coding styles to help us achieve a goal I originally saw in one of Mark Otto's repos.
+
+> All code in the codebase should look like a single person typed it, no matter how many people contribute.
+
+No doubt a idealistic goal, a couple of things are needed to achieve this:
+
+- A well promoted style guide
+- Something to aspire to (_Error:_ Maximum call stack size exceeded.)
+
+During a talk at Fluent Conf this year one of the speakers encouraged attendees to open source their style guides. Similar to open source software, having an open source software is a great way for individuals and companies to give back to the communities which helped them grow. And so it is with great please Trunk Club opens [our style guide](https://github.com/trunkclub/styleguide) with standards on CoffeeScript, HTML, CSS and SASS.
+
+Items introduced to the style guide are intended to meet one end, and that's a single voice, recognizable to everyone. Please let us know if you have questions. And thanks for being awesome.
