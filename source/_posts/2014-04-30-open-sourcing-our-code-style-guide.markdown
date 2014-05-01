@@ -8,8 +8,6 @@ categories:
 author: Josh Habdas
 ---
 
-# Open sourcing our code style guide
-
 Over the last we've been adopting and standardizing on coding styles to help us achieve a goal I originally saw in one of Mark Otto's repos.
 
 > All code in the codebase should look like a single person typed it, no matter how many people contribute.
