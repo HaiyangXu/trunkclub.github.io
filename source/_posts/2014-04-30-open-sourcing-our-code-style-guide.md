@@ -8,7 +8,7 @@ categories:
 author: Josh Habdas
 ---
 
-Over the last year TC has been standardizing on coding styles to help us achieve a goal I originally seen in one of Mark Otto's repos.
+Over the last year TC has been standardizing on coding styles to help us achieve a goal originally seen in one of Mark Otto's repos.
 
 > All code in the codebase should look like a single person typed it, no matter how many people contribute.
 
