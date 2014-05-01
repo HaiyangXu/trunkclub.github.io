@@ -12,7 +12,7 @@ Over the last we've been adopting and standardizing on coding styles to help us 
 
 > All code in the codebase should look like a single person typed it, no matter how many people contribute.
 
-No doubt a idealistic goal, a couple of things are needed to achieve this:
+No doubt an idealistic goal, a couple of things are needed to achieve this:
 
 - A well promoted style guide
 - Something to aspire to (_Error:_ Maximum call stack size exceeded.)
