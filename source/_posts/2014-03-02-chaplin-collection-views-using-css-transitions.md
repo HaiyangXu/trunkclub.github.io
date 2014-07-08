@@ -5,6 +5,8 @@ date: 2014-03-02 13:43
 comments: true
 categories:
   - programming
+  - ui
+  - performance
 author: Josh Habdas
 ---
 
