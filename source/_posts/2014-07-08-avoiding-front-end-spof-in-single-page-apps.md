@@ -14,15 +14,15 @@ A couple years back Steve Souders gave a great talk at Fluent Conf titled _Your 
 
 > Learn how to avoid front-end SPOF using Trunk Club's single-page app skeleton, Brunch with Panache
 
-Avoiding front-end SPOF in a single-page app like those created with BWP is relatively simple, but often flies in the face of what 3rd parties suggest in their implementation guides. Here's the typical site integration approach advocated by many 3rd parties, event today:
+Avoiding front-end SPOF in a single-page app like those created with BWP is relatively simple, but often flies in the face of what 3rd parties suggest in their implementation guides. Here's the typical site integration approach advocated by many 3rd parties, even today:
 
-1. Insert our script into your HTML head or BODY section of your main template. We should be first. Or last.
+1. Insert our script into the HEAD or BODY of your main template. We should be first. Or last.
 2. Don't worry, our response times are really, really fast.
-3. And we're using a script-loader with ajax so everything will be fast.
+3. And we're using a script-loader with, ajax so everything will be fast.
 
 I've seen this approach advocated for a slew of products including Google Analytics, Typekit, BrightTag, Test and Target, Bazaarvoice, and it's a flat-out lie. The point is, if you're dropping a SCRIPT tag into your HTML, and the [`DOMContentLoaded`](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded) event hasn't fired yet, you're primed for SPOF. I've seen tiny script-loaders cause upwards of 20 second page load times. But there's a better way...
 
-If you're building a single-page app the solution is simple, wait until the apps begins to initialize before calling scripts, and call them all in a [non-blocking manner](http://calendar.perfplanet.com/2012/the-non-blocking-script-loader-pattern/) from the application's own JS.
+If you're building a single-page app the solution is simple, wait until the app begins to initialize before calling scripts, and call them all in a [non-blocking manner](http://calendar.perfplanet.com/2012/the-non-blocking-script-loader-pattern/) from the application's own JS.
 
 To avoid SPOF in [BWP](https://github.com/trunkclub/brunch-with-panache) single-page applications, simply do the following:
 
@@ -73,7 +73,7 @@ else
 
 ```
 
-**Tip:** Don't forget to add the `'use strict'` as shown above to enforce strict mode on the embedded JS)
+**Tip:** Don't forget to add the `'use strict'` as shown above to enforce strict mode on the embedded JS.
 
 And if you've [enabled CoffeeLint](https://github.com/brunch/coffeelint-brunch) (you are linting, aren't you?), you can omit linting of `initialize.coffee` by updating the [`brunch-config.js`](https://github.com/brunch/brunch/blob/master/docs/config.md) with a negative-lookahead assertion like so:
 
