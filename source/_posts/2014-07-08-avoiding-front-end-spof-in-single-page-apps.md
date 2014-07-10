@@ -14,6 +14,8 @@ A couple years back Steve Souders gave a great talk at Fluent Conf titled _Your 
 
 > Learn how to avoid front-end SPOF using Trunk Club's single-page app skeleton, Brunch with Panache
 
+<!-- more -->
+
 Avoiding front-end SPOF in a single-page app like those created with BWP is relatively simple, but often flies in the face of what 3rd parties suggest in their implementation guides. Here's the typical site integration approach advocated by many 3rd parties, even today:
 
 1. Insert our script into the HEAD or BODY of your main template. We should be first. Or last.
