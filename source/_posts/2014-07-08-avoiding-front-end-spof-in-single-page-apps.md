@@ -22,7 +22,7 @@ Avoiding front-end SPOF in a single-page app like those created with BWP is rela
 2. Don't worry, our response times are really, really fast.
 3. And we're using a script-loader with, ajax so everything will be fast.
 
-I've seen this approach advocated for a slew of products including Google Analytics, Typekit, BrightTag, Test and Target, Bazaarvoice, and it's a flat-out lie. The point is, if you're dropping a SCRIPT tag into your HTML, and the [`DOMContentLoaded`](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded) event hasn't fired yet, you're primed for SPOF. I've seen tiny script-loaders cause upwards of 20 second page load times. But there's a better way...
+I've seen this approach advocated for a slew of products including Google Analytics, Typekit, BrightTag, Test and Target, Bazaarvoice, and it's not good. The point is, if you're dropping a SCRIPT tag into your HTML, and the [`DOMContentLoaded`](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded) event hasn't fired yet, you're primed for SPOF. I've seen tiny script-loaders cause upwards of 20 second page load times. But there's a better way...
 
 If you're building a single-page app the solution is simple, wait until the app begins to initialize before calling scripts, and call them all in a [non-blocking manner](http://calendar.perfplanet.com/2012/the-non-blocking-script-loader-pattern/) from the application's own JS.
 
