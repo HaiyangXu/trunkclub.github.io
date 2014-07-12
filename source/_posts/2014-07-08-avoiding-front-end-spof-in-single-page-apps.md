@@ -38,12 +38,14 @@ Below is a sample of the `initialize.coffee` file used in one of our major produ
 ``` coffeescript
 'use strict'
 
+utils = require('lib/utils')
+
 initialize = ->
 
   # Add Analytics for tracking with Segment.io
   `
   window.analytics||(window.analytics=[]),window.analytics.methods=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group","on","once","off"],window.analytics.factory=function(a){return function(){var t=Array.prototype.slice.call(arguments);return t.unshift(a),window.analytics.push(t),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var method=window.analytics.methods[i];window.analytics[method]=window.analytics.factory(method)}window.analytics.load=function(a){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+a+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},window.analytics.SNIPPET_VERSION="2.0.6",
-  window.analytics.load(/(\w+\.)?trunkclub.dev/.test(window.location.hostname) || /\bstaging\b/.test(window.location.hostname) ? "44yg1der8p" : "moz42de0rp");
+  window.analytics.load(utils.app.regexes.origin.prod.test(window.location.hostname) ? "44yg1der8p" : "moz42de0rp");
   `
 
   # Add Typekit for web font support
