@@ -22,7 +22,7 @@ Trunk Club released today a new version of the front-end seed we use to develop 
 - Karma test runner now auto-detects and uses available browsers for unit testing.
 - Unit and site testing capabilities moved under Jake task called `test:install`, allowing for faster development installations.
 - Easier-to-use environment variables as [documented in the README](https://github.com/trunkclub/brunch-with-panache/blob/0.8.4/README.md#coffeeenv).
-- New Jake taks for cleaning up locally cached Node and Bower dependencies.
+- New Jake tasks for cleaning up locally cached Node and Bower dependencies.
 - Removed the _page-view_ generator in favor of the _scaffold_ generator.
 - Various application and development dependency updates.
 
