@@ -7,8 +7,6 @@ categories:
   - apprenticeship
 ---
 
-##Trunk Club Apprenticeship: An Introduction
-
 Before I start writing about Trunk Club, I should probably introduce myself since I am a relatively new face around here.
 
 I started at Trunk Club as a developer apprentice towards the end of June. I am the only one at the moment, but hopefully there may be others in the near future! My background is in Economics and Information Systems, and I worked as a .NET developer for a few months before deciding to go to Dev Bootcamp. I didn’t have enough experience to really succeed at my first job (I only took one programming course in college), so I needed to find something that would help me improve. Dev Bootcamp was the perfect solution for me, and I had an insanely good time going through the program. Not long after finishing there, I was able to get my job here as an apprentice (hooray!!).
