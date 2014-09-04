@@ -4,7 +4,7 @@ title: "Trunk Club Apprenticeship: An Introduction"
 date: 2014-09-03 17:09
 comments: true
 categories: 
-	- apprenticeship
+  - apprenticeship
 ---
 
 ##Trunk Club Apprenticeship: An Introduction
