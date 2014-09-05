@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Trunk Club Apprenticeship: The Beginning"
-date: 2014-09-04 17:38
+date: 2014-09-05 12:01
 comments: true
-categories: 
-	- apprenticeship
+categories:
+	- apprenticeship 
 ---
 
 The first week of Trunk Club was a bit of a blur. There was a lot to take in. There were many more people and the office space was much bigger than I expected. On top of a new environment, there were a lot of new technologies and a completely different architecture than I had seen before. My head was spinning.
@@ -16,7 +16,7 @@ My job for the first week was to get situated and start getting things set up on
 Like many startups, they use GitHub as their collaboration tool. For those who have never used [GitHub](https://github.com/about) or know what [git](http://git-scm.com/doc) is, git is a source code management system. The great thing about it is that if you commit (save to this system) the changes you make, you will have a history of your changes and if anything goes wrong, you can rollback your changes. GitHub is a site for you to store your code and save your git history (a history of any changes to the code) so that others can see and make changes to the code as well.
 
 With over 100 repositories, essentially folders on GitHub that hold a project, the first thing to do was to figure which ones to pull and get running locally. I was added as a member of Trunk Club on GitHub and began the week of downloads. I started pretty confidently, but like most things in software, it always takes longer than you think. So. many. errors. It took me a couple of days to work through all the random issues. Some of it was things like working with FactoryGirl (used to create scenarios for testing code), 
-`FactoryGirl.create(:employee, :email => "username@trunkclub.com", :role => "Technology")`. 
+```FactoryGirl.create(:employee, :email => "username@trunkclub.com", :role => "Technology")```. 
 I had “technology” instead of “Technology”. I learned that you can only use either [RVM](http://rvm.io/) or [rbenv](https://github.com/sstephenson/rbenv) to manage your rubies and if you want to switch, you have to completely remove the other manager. I even learned a little bit about how the different apps and APIs talk to each other. Hello, [nginx](http://nginx.com/) (which can be a whole other blog post on its own).
 
 I think the most important habit I decided to be religious about was taking a notebook with me everywhere I went. It can be surprisingly difficult to keep track of everything you have worked on in a day. One of the best things I was given on my first day at work was a lovely leather bound journal. At first, I couldn’t think of what I would use it for. Then I went to my first stand up. 
