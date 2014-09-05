@@ -31,6 +31,6 @@ My first week at Trunk Club was a really exciting week. There is a lot to learn,
 
 To really kick things off, we had a Tech Team outing at the end of the week. Behold, bubble soccer! Not as easy at it looks, but every bit as amazing. 
 
-![bubble soccer](http://i.imgur.com/kSEBeoK.jpg)
+![bubble soccer](http://i.imgur.com/kSEBeoKl.jpg)
 
 If this is any indicator of how my apprenticeship is going to go, I have a lot to look forward to!
