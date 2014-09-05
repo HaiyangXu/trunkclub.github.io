@@ -4,7 +4,7 @@ title: "Trunk Club Apprenticeship: The Beginning"
 date: 2014-09-05 12:01
 comments: true
 categories:
-	- apprenticeship 
+  - apprenticeship 
 ---
 
 The first week of Trunk Club was a bit of a blur. There was a lot to take in. There were many more people and the office space was much bigger than I expected. On top of a new environment, there were a lot of new technologies and a completely different architecture than I had seen before. My head was spinning.
