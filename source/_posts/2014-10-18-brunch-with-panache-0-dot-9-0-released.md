@@ -36,8 +36,8 @@ Give me the deets.
 - Provides a Hapi server. If it's [good enough for Black Friday](http://thechangelog.com/116/), it's good enough for us.
 - Use the Scaffold generator to quickly create boilerplate views, templates, models, controllers and routing.
 - Fixes a bug in the `server:dev` and `server:prod` Jake tasks.
-- `npm start` now complies the app for `--production` and runs with Hapi while watching for changes
-- You can now add Swag for use with Handlebars by simply typing `jake add:swag` following an `npm install`
+- `npm start` now complies the app for `--production` and runs with Hapi while watching for changes.
+- You can now add Swag for use with Handlebars by simply typing `jake add:swag` following an `npm install`.
 - Some issues with the Karma test runner have been fixed up, so `jake test:all` works like a charm.
 - Browser Detect added. Now unit tests run not just thru [PhantomJS](http://phantomjs.org/), but all system-detected browsers.
 
