@@ -22,7 +22,7 @@ In plain English (mostly).
 
 - Improved page load speed. Perceived page load time with Elastic Search is about 250ms.
 - Autoprefixes CSS for faster Sass development without [Buorbon](http://bourbon.io/).
-- Run experiment faster than ever with the new Scaffold generator and other web component enhancements.
+- Run experiments faster than ever with the new Scaffold generator and other web component enhancements.
 - Now capable of running as a daemon in Docker using [bwp-docker](https://github.com/trunkclub/bwp-docker).
 - Build more ambitious, full-stack JS web applications
 
