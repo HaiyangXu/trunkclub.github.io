@@ -26,6 +26,8 @@ In plain English (mostly).
 - Now capable of running as a daemon in Docker using [bwp-docker](https://github.com/trunkclub/bwp-docker).
 - Build more ambitious, full-stack JS web applications
 
+<!-- more -->
+
 ## What's new [since 0.8.4](http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/)
 Give me the deets.
 
