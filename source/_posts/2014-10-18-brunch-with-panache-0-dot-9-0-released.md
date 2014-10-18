@@ -43,7 +43,7 @@ Give me the deets.
 
 To upgrade existing BWP apps from `0.8.4` to `0.9.0`, set `brunch-with-panache` as your __upstream__, merge in `tags/0.9.0`, resolve any merge conflicts and test your application. Once the new upstream is merged, run the following commands to update your `npm` dependencies and restart the server like so:
 
-``` coffee
+```sh
 $ jake npm:clean # rm -rf node_modules && npm cache clean
 $ npm install
 $ jake server:dev # runs Hapi server and watches for changes (with Source Maps)
