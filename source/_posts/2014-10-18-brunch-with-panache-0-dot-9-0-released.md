@@ -24,7 +24,7 @@ In plain English (mostly).
 - Autoprefixes CSS for faster Sass development without [Buorbon](http://bourbon.io/).
 - Run experiments faster than ever with the new Scaffold generator and other web component enhancements.
 - Now capable of running as a daemon in Docker using [bwp-docker](https://github.com/trunkclub/bwp-docker).
-- Build more ambitious, full-stack JS web applications
+- Build more ambitious, full-stack JS web applications.
 
 <!-- more -->
 
@@ -37,8 +37,8 @@ Give me the deets.
 - Use the Scaffold generator to quickly create boilerplate views, templates, models, controllers and routing.
 - Fixes a bug in the `server:dev` and `server:prod` Jake tasks.
 - `npm start` now complies the app for `--production` and runs with Hapi while watching for changes.
-- You can now add Swag for use with Handlebars by simply running `jake add:swag` following an `npm install`.
-- Some issues with the Karma test runner have been fixed up, so `jake test:all` works like a charm.
+- Provides out of the box support for [Swag](https://github.com/elving/swag) for use with [Handlebars](handlebarsjs.com) and can be removed with `jake rem:swag`.
+- Some issues with the [Karma](http://karma-runner.github.io/0.12/index.html) test runner have been fixed up, so `jake test:all` works like a charm.
 - Browser Detect added. Now unit tests run not just thru [PhantomJS](http://phantomjs.org/), but all system-detected browsers.
 
 ## Upgrading
