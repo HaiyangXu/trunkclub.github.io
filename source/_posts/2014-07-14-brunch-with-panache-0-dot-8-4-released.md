@@ -6,7 +6,12 @@ comments: true
 categories: 
   - programming
   - ui
-  - performance
+tags:
+  - web apps
+  - single-page apps
+  - rich internet apps
+  - web engineering
+  - fat client architecture
 author: Josh Habdas
 ---
 
