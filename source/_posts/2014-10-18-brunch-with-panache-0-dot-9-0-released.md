@@ -58,7 +58,7 @@ $ jake server:dev # runs Hapi server and watches for changes (with Source Maps)
 Please see the [ChangeLog](https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md) for more details.
 
 ## A closer look at generators
-BWP is designed to minimize redundant tasks. Generators help immensely in that regard, saving time. Which is why we're proud BWP comes with a collection of built-in generators. To see what's available simply run `jake generators` (aliased with `jake gen` and `jake g`) at the terminal from within the project directory for a listing of what's possible.
+BWP is designed to minimize redundant tasks. Generators help immensely in that regard, saving time. Which is why we're proud BWP comes with a collection of built-in generators. To see what's available simply run `jake generate` (aliased with `jake gen` and `jake g`) at the terminal from within the project directory for a listing of what's possible.
 
 As of this version, BWP supports the following generators:
 
