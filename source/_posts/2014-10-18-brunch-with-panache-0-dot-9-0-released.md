@@ -56,3 +56,60 @@ $ jake server:dev # runs Hapi server and watches for changes (with Source Maps)
 ```
 
 Please see the [ChangeLog](https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md) for more details.
+
+## A closer look at generators
+BWP is designed to minimize redundant tasks. Generators help immensely in that regard. Which is why we're proud BWP can help save time writing boilerplate code using a collection of built-in generators. To see what's available simply run `jake generators` (aliased with `jake gen` and `jake g`) at the terminal from with the BWP project for a listing of what's possible.
+
+As of this version, BWP supports the following generators:
+
+```sh
+$ jake gen
+List of available generators in ./generators:
+ * code-test (Test file for code testing)
+ * collection (Chaplin collection and unit test)
+ * collection-view (Chaplin collection view and unit test)
+ * controller (Chaplin controller and unit test)
+ * model (Chaplin model and unit test)
+ * scaffold (Chaplin Collection View, Controller, Actions and Routes)
+ * site-test (Test file for site testing)
+ * view (Chaplin view and unit test)
+```
+
+A powerful generator is the scaffold generator, which combines together other generators to form a simple package for quickly prototyping new concepts. Here's what it'll do:
+
+- Takes a dasherized-string-literal (singular form) as an input name creates files
+- Creates a Model and a Collection (inflection is automatic) using the name provided
+- Creates a named View and a Collection View, and their respective Handlebars template files
+- Stubs out unit test files for the above
+- Creates a new controller and connects everything together using a `index` and a `show` action
+- Updates `routes.coffee`, enabling instant available navigation to the new page
+
+Here's the sample output from the Scaffold generator, which takes about a second to run. These files would otherwise be created by hand, leading to less consistency and wasted effort.
+
+```sh
+$ jake g scaffold=user
+29 Oct 00:26:00 - info: create app/models/user.coffee
+29 Oct 00:26:00 - info: init test/code/models
+29 Oct 00:26:00 - info: init app/views/user/templates
+29 Oct 00:26:00 - info: create app/models/users.coffee
+29 Oct 00:26:00 - info: init test/code/models
+29 Oct 00:26:00 - info: init app/views/user/templates
+29 Oct 00:26:00 - info: init app/views/user
+29 Oct 00:26:00 - info: init app/views/user/templates
+29 Oct 00:26:00 - info: create test/code/views/user.coffee
+29 Oct 00:26:00 - info: init app/views/user
+29 Oct 00:26:00 - info: init app/views/user
+29 Oct 00:26:00 - info: create test/code/models/user-test.coffee
+29 Oct 00:26:00 - info: create app/views/user/user-view.coffee
+29 Oct 00:26:00 - info: create app/views/user/templates/user-item.hbs
+29 Oct 00:26:00 - info: create test/code/views/user-test.coffee
+29 Oct 00:26:00 - info: appending to app/routes.coffee
+29 Oct 00:26:00 - info: create app/controllers/user-controller.coffee
+29 Oct 00:26:00 - info: create test/code/models/users-test.coffee
+29 Oct 00:26:00 - info: create app/views/user/user-collection-view.coffee
+29 Oct 00:26:00 - info: create app/views/user/user-item-view.coffee
+29 Oct 00:26:00 - info: create app/views/user/templates/user.hbs
+29 Oct 00:26:00 - info: create app/views/user/templates/user-collection.hbs
+```
+
+When you need to be more surgical about the way you work, the individual scaffolding tools will cover a majority of your needs. Generators can easily be customized to create widget factories, making it easy to implement commonly-used components.
