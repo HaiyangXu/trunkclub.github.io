@@ -16,7 +16,7 @@ tags:
 author: Josh Habdas
 ---
 
-Trunk Club released last week a new version of the front-end seed we use to develop our rich web clients. [Brunch with Panache v0.9.0](https://github.com/trunkclub/brunch-with-panache/tree/0.9.0) is the first release to enable full-stack JS development using Node.js and [Hapi](http://hapijs.com/), making it even easier to build the single-page app of your dreams, even ones with [reverse proxies](https://github.com/jhabdas/hopstop/blob/ratchet/server/index.coffee#L9-L19) that can be packaged right along with application code.
+Trunk Club released last week a new version of the front-end seed we use to develop our rich web clients. [Brunch with Panache v0.9.0](https://github.com/trunkclub/brunch-with-panache/tree/0.9.0) is the first release to enable full-stack JS development using Node.js and [Hapi](http://hapijs.com/), making it even easier to build the single-page app of your dreams, even ones with [reverse proxies](https://github.com/jhabdas/hopstop/blob/ratchet/server/index.coffee#L9-L19) that can be packaged right along with application code. Looking for Docker integration? We've got that too.
 
 ## Features
 In plain English (mostly).
