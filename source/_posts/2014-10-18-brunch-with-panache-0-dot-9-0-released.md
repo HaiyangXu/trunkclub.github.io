@@ -36,7 +36,7 @@ Give me the deets.
 - Provides a Hapi server. If it's [good enough for Black Friday](http://thechangelog.com/116/), it's good enough for us.
 - Use the Scaffold generator to quickly create boilerplate views, templates, models, controllers and routing.
 - Fixes a bug in the `server:dev` and `server:prod` Jake tasks.
-- `npm start` now complies the app for `--production` and runs with Hapi while watching for changes.
+- `npm start` now compiles the app for `--production` and runs with Hapi while watching for changes.
 - Provides out of the box support for [Swag](https://github.com/elving/swag) for use with [Handlebars](handlebarsjs.com) and can be removed with `jake rem:swag`.
 - Some issues with the [Karma](http://karma-runner.github.io/0.12/index.html) test runner have been fixed up, so `jake test:all` works like a charm.
 - Browser Detect added. Now unit tests run not just thru [PhantomJS](http://phantomjs.org/), but all system-detected browsers.
