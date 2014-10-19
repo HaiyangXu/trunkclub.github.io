@@ -49,7 +49,7 @@ Give me the deets.
 
 To upgrade existing BWP apps from `0.8.4` to `0.9.0`, set `brunch-with-panache` as your __upstream__, merge in `tags/0.9.0`, resolve any merge conflicts and test your application. Once the new upstream is merged, run the following commands to update your `npm` dependencies and restart the server like so:
 
-```sh
+```
 $ jake npm:clean # rm -rf node_modules && npm cache clean
 $ npm install
 $ jake server:dev # runs Hapi server and watches for changes (with Source Maps)
@@ -62,7 +62,7 @@ BWP is designed to minimize redundant tasks. Generators help immensely in that r
 
 As of this version, BWP supports the following generators:
 
-```sh
+```
 $ jake gen
 List of available generators in ./generators:
  * code-test (Test file for code testing)
@@ -86,7 +86,7 @@ A powerful generator is the scaffold generator, which combines together other ge
 
 Here's the sample output from the Scaffold generator, which takes about a second to run. These files would otherwise be created by hand, leading to less consistency and wasted effort.
 
-```sh
+```
 $ jake g scaffold=user
 29 Oct 00:26:00 - info: create app/models/user.coffee
 29 Oct 00:26:00 - info: init test/code/models
