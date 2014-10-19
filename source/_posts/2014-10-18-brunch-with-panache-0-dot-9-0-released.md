@@ -12,6 +12,7 @@ tags:
   - rich internet apps
   - web engineering
   - fat client architecture
+  - node
 author: Josh Habdas
 ---
 
