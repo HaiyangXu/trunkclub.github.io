@@ -35,13 +35,14 @@ Give me the deets.
 - Closed [4 issues](https://github.com/trunkclub/brunch-with-panache/issues?state=closed), and made a number of other small bugfixes and enhancements. ([view diff](https://github.com/trunkclub/brunch-with-panache/compare/trunkclub:0.8.4...0.9.0))
 - Removed dependency on Ruby by favoring a C-based version of Sass called [libasss](https://github.com/sass/libsass). BWP no longer relies on Ruby.
 - Provides a Hapi server. If it's [good enough for Black Friday](http://thechangelog.com/116/), it's good enough for us.
-- Use the Scaffold generator to quickly create boilerplate views, templates, models, controllers and routing.
+- Use the Scaffold generator to quickly create boilerplate views, templates, models, controllers and routing in a single instruction, e.g. `jake g scaffold=user`.
 - Fixes a bug in the `server:dev` and `server:prod` Jake tasks.
-- `npm start` now compiles the app for `--production` and runs with Hapi while watching for changes.
+- `npm start` now compiles the app for `--production` and runs with Hapi while watching for changes to application source, allowing hot deployments.
 - Provides out of the box support for [Swag](https://github.com/elving/swag) for use with [Handlebars](handlebarsjs.com) and can be removed with `jake rem:swag`.
 - Some issues with the [Karma](http://karma-runner.github.io/0.12/index.html) test runner have been fixed up, so `jake test:all` works like a charm.
 - Browser Detect added. Now unit tests run not just thru [PhantomJS](http://phantomjs.org/), but all system-detected browsers.
 - Fixed a deep-dependency issue causing source maps debugging to go haywire on OS X when `ulimit -n 10000`.
+- Use [bwp-docker](https://github.com/trunkclub/bwp-docker) to start a running instance of BWP with Docker in seconds.
 
 ## Upgrading
 
