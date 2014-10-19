@@ -36,7 +36,7 @@ Give me the deets.
 - Closed [4 issues](https://github.com/trunkclub/brunch-with-panache/issues?state=closed), and made a number of other small bugfixes and enhancements. ([view diff](https://github.com/trunkclub/brunch-with-panache/compare/trunkclub:0.8.4...0.9.0))
 - Removed dependency on Ruby by favoring a C-based version of Sass called [libasss](https://github.com/sass/libsass). BWP no longer relies on Ruby.
 - Provides a Hapi server. If it's [good enough for Black Friday](http://thechangelog.com/116/), it's good enough for us.
-- Use the improved Scaffold generator to generate boilerplate for entire pages, with routing, in a single instruction, e.g. `jake g scaffold=user`.
+- Improved Scaffold generator to allows new pages to be created in a single [Jake](http://jakejs.com/) task: `jake g scaffold=user`.
 - Fixes a bug in the `server:dev` and `server:prod` Jake tasks.
 - `npm start` now compiles the app for `--production` and runs with Hapi while watching for changes to app source.
 - Provides out of the box support for [Swag](https://github.com/elving/swag) for use with [Handlebars](handlebarsjs.com) and can be removed with `jake rem:swag`.
