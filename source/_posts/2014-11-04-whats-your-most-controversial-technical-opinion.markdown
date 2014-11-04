@@ -7,7 +7,7 @@ categories:
 author: Ross Bell
 ---
 
-At Trunk Club, I think one of the most specialized and skilled tasks we perform is finding more engineers to work with us. Hiring is one of the most difficult things we do around here, and it’s one of the most important areas I can contribute towards. There’s already a pretty decent amount of material out there on how to hire people in technology, some of my favorite coming from [Joel Spolsky](http://www.google.com/url?q=http%3A%2F%2Fwww.joelonsoftware.com%2Farticles%2FGuerrillaInterviewing3.html&sa=D&sntz=1&usg=AFQjCNHFcvl2r8IGfj90w2uJCCFERY_OHg) and [Steve Yegge](https://www.google.com/url?q=https%3A%2F%2Fsites.google.com%2Fsite%2Fsteveyegge2%2Ffive-essential-phone-screen-questions&sa=D&sntz=1&usg=AFQjCNGhRfpnhcFr6VOWrAoov1U17SrNnA). However, I think sometimes we’re too quick to decide technical chops are paramount, and little else matters if you find somebody with a solid technical ability.
+At Trunk Club, I think one of the most specialized and skilled tasks we perform is finding more engineers to work with us. Hiring is one of the most difficult things we do around here, and it’s one of the most important areas I can contribute towards. There’s already a pretty decent amount of material out there on how to hire people in technology, some of my favorite coming from [Joel Spolsky](http://www.joelonsoftware.com/articles/GuerrillaInterviewing3.html) and [Steve Yegge](https://sites.google.com/site/steveyegge2/five-essential-phone-screen-questions). However, I think sometimes we’re too quick to decide technical chops are paramount, and little else matters if you find somebody with a solid technical ability.
 
 <!-- more -->
 
