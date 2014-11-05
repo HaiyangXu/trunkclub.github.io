@@ -5,6 +5,7 @@ date: 2014-09-03 17:09
 comments: true
 categories: 
   - apprenticeship
+author: Amelia Padua
 ---
 
 Before I start writing about Trunk Club, I should probably introduce myself since I am a relatively new face around here.
