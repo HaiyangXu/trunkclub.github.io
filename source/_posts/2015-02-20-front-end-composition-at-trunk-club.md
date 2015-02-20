@@ -23,7 +23,7 @@ tags:
 
 As the Web shifts from a web of content as we’ve known it to an application platform there’s been a renewed emphasis on [composition in web app architecture](http://addyosmani.com/blog/architecture-on-the-road-to-2015/). To manage composition in our Web UIs at Trunk Club we use a number of techniques and patterns to help scale our suite of rich-clients while avoiding duplication of common componentry. This article will discuss some of the patterns we use, describe the concept of a component library and introduce software for sharing modules between apps without use of WebPack or Browserify.
 
-> Learn how to use JS modules and a component library to DRY up apps in a forward-looking way.
+> Learn how to use JS modules and a simple component library to share code in a forward-looking way.
 
 <!-- more -->
 
