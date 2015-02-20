@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Brunch with Panache 0.9.0 Released - Trunk Club - Tech Blog</title>
+  <meta name="author" content="Trunk Club">
+
+  
+  <meta name="description" content="Trunk Club released last week a new version of the front-end seed we use to develop our rich web clients. Brunch with Panache v0.9.0 is the first &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Trunk Club - Tech Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<link rel="dns-prefetch" href="http://use.typekit.com">
+<script type="text/javascript" src="//use.typekit.net/hqi2igq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29434754-3', 'trunkclub.com');
+  ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1>
+    <a href="/">
+      <img alt="Trunk Club" src="//trunkclub-assets.s3.amazonaws.com/site-assets/logos/tc-wordmark-black.png">
+      <span class="isHiddenVisually">Trunk Club - Tech Blog</span>
+    </a>
+  </h1>
+  
+    <h2>Engineering</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="techblog.trunkclub.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Brunch With Panache 0.9.0 Released</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-18T18:08:00+00:00" pubdate data-updated="true">Oct 18<span>th</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Trunk Club released last week a new version of the front-end seed we use to develop our rich web clients. <a href="https://github.com/trunkclub/brunch-with-panache/tree/0.9.0">Brunch with Panache v0.9.0</a> is the first release to enable full-stack JS development using Node.js and <a href="http://hapijs.com/">Hapi</a>, making it even easier to build the single-page app you always wanted. Creating <a href="https://github.com/jhabdas/hopstop/blob/ratchet/server/index.coffee#L9-L19">reverse proxies</a> is simple, and there are <a href="http://hapijs.com/plugins">plenty of plug-ins</a> for use in scaling. Deploying with <a href="https://www.docker.com/">Docker</a>? Check out the new Docker integration. See below for details.</p>
+
+<h2>Features</h2>
+
+<p>In plain English (mostly).</p>
+
+<ul>
+<li>Improved page load speed. Perceived page load time with Elastic Search is about 250ms.</li>
+<li>Autoprefixes CSS for faster Sass development without <a href="http://bourbon.io/">Bourbon</a>.</li>
+<li>Run experiments faster than ever with the new Scaffold generator and other web component enhancements.</li>
+<li>Now capable of running as a daemon in Docker using <a href="https://github.com/trunkclub/bwp-docker">bwp-docker</a>.</li>
+<li>Build more ambitious, full-stack JS web applications.</li>
+<li>Better automated testing facilities for easier CI integration and confident application deployments.</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>What&rsquo;s new <a href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/">since 0.8.4</a></h2>
+
+<p>Give me the deets.</p>
+
+<ul>
+<li>Closed <a href="https://github.com/trunkclub/brunch-with-panache/issues?state=closed">4 issues</a>, and made a number of other small bugfixes and enhancements. (<a href="https://github.com/trunkclub/brunch-with-panache/compare/trunkclub:0.8.4...0.9.0">view diff</a>)</li>
+<li>Removed dependency on Ruby by favoring a C-based version of Sass called <a href="https://github.com/sass/libsass">libasss</a>. BWP no longer relies on Ruby.</li>
+<li>Provides a Hapi server. If it&rsquo;s <a href="http://thechangelog.com/116/">good enough for Black Friday</a>, it&rsquo;s good enough for us.</li>
+<li>Improved Scaffold generator to allows new pages to be created in a single <a href="http://jakejs.com/">Jake</a> task: <code>jake g scaffold=user</code>.</li>
+<li>Fixes a bug in the <code>server:dev</code> and <code>server:prod</code> Jake tasks.</li>
+<li><code>npm start</code> now compiles the app for <code>--production</code> and runs with Hapi while watching for changes to app source.</li>
+<li>Provides out of the box support for <a href="https://github.com/elving/swag">Swag</a> for use with <a href="handlebarsjs.com">Handlebars</a> and can be removed with <code>jake rem:swag</code>.</li>
+<li>Some issues with the <a href="http://karma-runner.github.io/0.12/index.html">Karma</a> test runner have been fixed up, so <code>jake test:all</code> works like a charm.</li>
+<li>Browser Detect added. Now unit tests run not just thru <a href="http://phantomjs.org/">PhantomJS</a>, but all system-detected browsers.</li>
+<li>Fixed a deep-dependency issue causing source maps debugging to go haywire on OS X when <code>ulimit -n 10000</code>.</li>
+<li>Use <a href="https://github.com/trunkclub/bwp-docker">bwp-docker</a> to start a running instance of BWP with Docker in seconds.</li>
+</ul>
+
+
+<h2>Upgrading</h2>
+
+<p>To upgrade existing BWP apps from <code>0.8.4</code> to <code>0.9.0</code>, set <code>brunch-with-panache</code> as your <strong>upstream</strong>, merge in <code>tags/0.9.0</code>, resolve any merge conflicts and test your application. Once the new upstream is merged, run the following commands to update your <code>npm</code> dependencies and restart the server like so:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ jake npm:clean # rm -rf node_modules && npm cache clean
+</span><span class='line'>$ npm install
+</span><span class='line'>$ jake server:dev # runs Hapi server and watches for changes (with Source Maps)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please see the <a href="https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md">ChangeLog</a> for more details.</p>
+
+<h2>A closer look at generators</h2>
+
+<p>BWP is designed to minimize redundant tasks. Generators help immensely in that regard, saving time. Which is why we&rsquo;re proud BWP comes with a collection of built-in generators. To see what&rsquo;s available simply run <code>jake generate</code> (aliased with <code>jake gen</code> and <code>jake g</code>) at the terminal from within the project directory for a listing of what&rsquo;s possible.</p>
+
+<p>As of this version, BWP supports the following generators:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ jake gen
+</span><span class='line'>List of available generators in ./generators:
+</span><span class='line'> * code-test (Test file for code testing)
+</span><span class='line'> * collection (Chaplin collection and unit test)
+</span><span class='line'> * collection-view (Chaplin collection view and unit test)
+</span><span class='line'> * controller (Chaplin controller and unit test)
+</span><span class='line'> * model (Chaplin model and unit test)
+</span><span class='line'> * scaffold (Chaplin Collection View, Controller, Actions and Routes)
+</span><span class='line'> * site-test (Test file for site testing)
+</span><span class='line'> * view (Chaplin view and unit test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A powerful generator is the scaffold generator, which combines together other generators to form a simple package for quickly prototyping new concepts. Here&rsquo;s what it&rsquo;ll do:</p>
+
+<ul>
+<li>Takes a dasherized-string-literal (singular form) as an input name creates files</li>
+<li>Creates a Model and a Collection (inflection is automatic) using the name provided</li>
+<li>Creates a named View and a Collection View, and their respective Handlebars template files</li>
+<li>Stubs out unit test files for the above</li>
+<li>Creates a new controller and connects everything together using a <code>index</code> and a <code>show</code> action</li>
+<li>Updates <code>routes.coffee</code>, enabling instant available navigation to the new page</li>
+</ul>
+
+
+<p>Here&rsquo;s the sample output from the Scaffold generator, which takes about a second to run. These files would otherwise be created by hand, leading to less consistency and wasted effort.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ jake g scaffold=user
+</span><span class='line'>29 Oct 00:26:00 - info: create app/models/user.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: init test/code/models
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user/templates
+</span><span class='line'>29 Oct 00:26:00 - info: create app/models/users.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: init test/code/models
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user/templates
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user/templates
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/views/user.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/models/user-test.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/user-view.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/templates/user-item.hbs
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/views/user-test.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: appending to app/routes.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/controllers/user-controller.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/models/users-test.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/user-collection-view.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/user-item-view.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/templates/user.hbs
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/templates/user-collection.hbs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you need to be more surgical about the way you work, the individual scaffolding tools will cover a majority of your needs. Generators can easily be customized to create widget factories, making it easy to implement commonly-used components.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-18T18:08:00+00:00" pubdate data-updated="true">Oct 18<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/programming/'>programming</a>, <a class='category' href='/categories/ui/'>ui</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/" data-via="TrunkClubTech" data-counturl="http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/trunk-club-apprenticeship-the-beginning/" title="Previous Post: Trunk Club Apprenticeship: The Beginning">&laquo; Trunk Club Apprenticeship: The Beginning</a>
+      
+      
+        <a class="basic-alignment right" href="/whats-your-most-controversial-technical-opinion/" title="Next Post: What's Your Most Controversial Technical Opinion?">What's Your Most Controversial Technical Opinion? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/front-end-composition-at-trunk-club/">Front-end Composition at Trunk Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/whats-your-most-controversial-technical-opinion/">What's Your Most Controversial Technical Opinion?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/brunch-with-panache-0-dot-9-0-released/">Brunch With Panache 0.9.0 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/trunk-club-apprenticeship-the-beginning/">Trunk Club Apprenticeship: The Beginning</a>
+      </li>
+    
+      <li class="post">
+        <a href="/trunk-club-apprenticeship-an-introduction/">Trunk Club Apprenticeship: An Introduction</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <a class="twitter-timeline" href="https://twitter.com/TrunkClubTech" data-widget-id="378028276679049217">Tweets by @TrunkClubTech</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/trunkclub">@trunkclub</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'trunkclub',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Trunk Club -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'trunkclubtech';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/';
+        var disqus_url = 'http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

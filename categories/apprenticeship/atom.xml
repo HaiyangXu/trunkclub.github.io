@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: apprenticeship | Trunk Club - Tech Blog]]></title>
+  <link href="http://techblog.trunkclub.com/categories/apprenticeship/atom.xml" rel="self"/>
+  <link href="http://techblog.trunkclub.com/"/>
+  <updated>2015-02-20T18:03:58+00:00</updated>
+  <id>http://techblog.trunkclub.com/</id>
+  <author>
+    <name><![CDATA[Trunk Club]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: The Beginning]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-the-beginning/"/>
+    <updated>2014-09-05T12:01:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-the-beginning</id>
+    <content type="html"><![CDATA[<p>The first week of Trunk Club was a bit of a blur. There was a lot to take in. There were many more people and the office space was much bigger than I expected. On top of a new environment, there were a lot of new technologies and a completely different architecture than I had seen before. My head was spinning.</p>
+
+<p>The day I graduated Dev Bootcamp, I felt… exhausted more than anything (I spent a full week catching up on sleep), but I felt like I could conquer anything. When I started getting to know the developers at Trunk Club and actually digging through the code, that feeling was a bit shaken. It can be a little mind melting to think about how much there is to learn. Plus, it was hard not to be impressed by how much everyone seemed to know. It was wizardry and magic everywhere! That’s why I got into this industry, though. I love getting to learn what’s really happening under all that magic.</p>
+
+<p>My job for the first week was to get situated and start getting things set up on my laptop. That was not a small task.  I didn’t realized how much went on behind the scenes to make the entire business run. I think what surprised me the most was that they don’t work on just one monolithic application. They have been in the process of moving to a <a href="http://martinfowler.com/articles/microservices.html">microservice architecture</a>, which means their software is broken up into several separate pieces that work together. I was going to have to learn how to get the pieces I needed onto my local environment (my computer) and get them talking to each other.</p>
+
+<!-- more -->
+
+
+<p>Like many startups, they use GitHub as their collaboration tool. For those who have never used <a href="https://github.com/about">GitHub</a> or know what <a href="http://git-scm.com/doc">git</a> is, git is a source code management system. The great thing about it is that if you commit (save to this system) the changes you make, you will have a history of your changes and if anything goes wrong, you can rollback your changes. GitHub is a site for you to store your code and save your git history (a history of any changes to the code) so that others can see and make changes to the code as well.</p>
+
+<p>With over 100 repositories, essentially folders on GitHub that hold a project, the first thing to do was to figure which ones to pull and get running locally. I was added as a member of Trunk Club on GitHub and began the week of downloads. I started pretty confidently, but like most things in software, it always takes longer than you think. So. many. errors. It took me a couple of days to work through all the random issues. Some of it was things like working with FactoryGirl (used to create scenarios for testing code),
+<code>FactoryGirl.create(:employee, :email =&gt; "username@trunkclub.com", :role =&gt; "Technology")</code>.
+I had “technology” instead of “Technology”. I learned that you can only use either <a href="http://rvm.io/">RVM</a> or <a href="https://github.com/sstephenson/rbenv">rbenv</a> to manage your rubies and if you want to switch, you have to completely remove the other manager. I even learned a little bit about how the different apps and APIs talk to each other. Hello, <a href="http://nginx.com/">nginx</a> (which can be a whole other blog post on its own).</p>
+
+<p>I think the most important habit I decided to be religious about was taking a notebook with me everywhere I went. It can be surprisingly difficult to keep track of everything you have worked on in a day. One of the best things I was given on my first day at work was a lovely leather bound journal. At first, I couldn’t think of what I would use it for. Then I went to my first stand up.</p>
+
+<p>If you’ve never attended a stand up before, it’s just a short meeting that should last less than 15 minutes in which everyone on the team says what they worked on yesterday, what they will work on today, and if they have any blockers. Typically they’re held on a daily basis. It is a great way for everyone on a team to know what other people are working on, ask for help, and product managers find out relatively quickly when there is an issue that might affect the project timeline.</p>
+
+<p>Stand ups are where you need to remember what you’ve done. Once I started writing down the things I was working on, I was not only able to give a better description of what I was actually doing there, but I started to actually retain information (or at least some of it). If you’re just starting out, I highly recommend taking notes either as you go through the day. If you happen to be the type that never took notes in school because your memory is just that awesome, I suggest documenting issues you’ve run into that could benefit the next new person. It can be hard to find time to spend on documentation, but it’s one of the most useful tools. Of course as soon as I write that, I asked our engineering intern about how amazingly useful note taking is, expecting him to validate everything I just wrote, and he tells me he never writes anything down. Thanks, Ansh. Well, everyone has their own methods. Just don’t be afraid to keep a notebook of commands you might forget, context around something you will be working on, or very importantly, things you commit to doing.</p>
+
+<p>My first week at Trunk Club was a really exciting week. There is a lot to learn, but I am surrounded by incredibly smart people, each as nice and as willing to help as the next, and  feel lucky to be at a company filled with people that seem to genuinely like their jobs. How do you not love a place that treats you during the day?</p>
+
+<p><img src="http://i.imgur.com/jDd2VP6l.jpg" alt="Gelato!" /></p>
+
+<p>To really kick things off, we had a Tech Team outing at the end of the week. Behold, bubble soccer! Not as easy at it looks, but every bit as amazing.</p>
+
+<p><img src="http://i.imgur.com/kSEBeoKl.jpg" alt="bubble soccer" /></p>
+
+<p>If this is any indicator of how my apprenticeship is going to go, I have a lot to look forward to!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: An Introduction]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-an-introduction/"/>
+    <updated>2014-09-03T17:09:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-an-introduction</id>
+    <content type="html"><![CDATA[<p>Before I start writing about Trunk Club, I should probably introduce myself since I am a relatively new face around here.</p>
+
+<p>I started at Trunk Club as a developer apprentice towards the end of June. I am the only one at the moment, but hopefully there may be others in the near future! My background is in Economics and Information Systems, and I worked as a .NET developer for a few months before deciding to go to Dev Bootcamp. I didn’t have enough experience to really succeed at my first job (I only took one programming course in college), so I needed to find something that would help me improve. Dev Bootcamp was the perfect solution for me, and I had an insanely good time going through the program. Not long after finishing there, I was able to get my job here as an apprentice (hooray!!).</p>
+
+<p>My apprenticeship is 6 months with a review every 2 months. We break up our work into 2 week chunks, which we call sprints, so we decided that I will rotate teams every 2 sprints. As part of my apprenticeship, we thought it would be helpful if I could blog about what I’ve been learning each sprint. I’ll post blogs from the last few sprints over the next couple of weeks.</p>
+
+<p>I’m hoping that sharing some of my experiences will be useful for anyone just starting out, or thinking about becoming a developer. I love my job and ultimately, that’s what I want to share. I feel incredibly lucky to have landed where I have, and even more excited to see where the next several months take me!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: week 26]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-26/"/>
+    <updated>2012-09-10T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-week-26</id>
+    <content type="html"><![CDATA[<p>So … it’s been eight weeks since my last blog post. The last blog post I wrote said: “Next week: Review, working in a smaller team, Kissmetrics and Trunkboards version 2.” The review went very well, the second part of my apprenticeship was eye-opening and I definitely felt like I turned a corner. Concepts and patterns were easier to understand, I felt more useful when pairing, and I was able to get more done.</p>
+
+<!-- more -->
+
+
+<p>Teams have been broken down into smaller team focused on specific functions within the company, and I completed the Kissmetrics and Trunkboards v2 projects.</p>
+
+<p>To be honest, the last eight weeks are a big blur. It’s been very intense, a race to the finish to accomplish as much as I could during this apprenticeship. I wish I had blogged more but it was not a priority: If I were to graduate from my apprenticeship and become an engineer, I would no longer have the luxury of being an apprentice, i.e. spending so much time learning. So I made the most of the time I had left.</p>
+
+<p>I had my final review at the end of last month. Everyone from the tech team was there, plus a few people from the product team. I did two presentations: one just for the tech team, highlighting everything that I learned, and a second presentation for the larger group talking about the apprenticeship itself, how I got there and what I got out of it, followed by questions and answers.</p>
+
+<p>It was awesome to list the stuff that I had learned, and also see how much more there was for me to learn. I appreciated getting feedback on my performance and hearing what people thought I should focus on next.</p>
+
+<p>I left the room to let the group discuss what was now my application for an engineering position. I would be leaving for a pre-planned trip to Europe just two days later and would be gone for almost three weeks, so I was eager to hear the outcome of the apprenticeship before leaving. The day after the final review, before a happy hour event with the sales team, I got the great news from Mike Cruz that Trunk Club was offering me a position as a Software Engineer. I’m very happy and excited to have accepted that offer today.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: week 18]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-18/"/>
+    <updated>2012-06-29T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-week-18</id>
+    <content type="html"><![CDATA[<p>Now that felt great: I worked on a project that was very similar to last week’s Kissmetrics project, except this time it took me two days to finish it instead of five! I’m now completing projects regularly and I have code to commit to the release every week. My contribution level is definitely increasing on a weekly basis.</p>
+
+<!-- more -->
+
+
+<p>Part of it is understanding our code base better, but part of it is also having a much smoother workflow. I program, test, commit, present/test with stakeholders with much more ease now, which allows me to focus more on my code. Things are easier with the product team. I feel like I’m more helpful and pro-active with them, and we get more done.</p>
+
+<p>I’m also able to quickly build upon what I have just learned, needing less time to digest. Tuesday night, at the end of the day, I received a request for a feature and was able to get it done just a few hours later. A few weeks ago such time constraints would guarantee not finishing on time, but this one was doable thanks to the projects that I worked on the last few weeks. I feel like I can take on a much wider variety of projects now. I probably just need more time to complete them than others (which I don’t mind taking), and even that is slowly getting better. It’s all about adding more value.</p>
+
+<p>I finished reading Seven Languages in Seven Weeks. I’ll post my notes on Seven Languages shortly, but the short take on it is this: Great book, helped me understand how other languages (non-OO, functional etc.) function, and what the best use for some of them is. Sometimes it was a bit above my level, but never enough not be understandable and useful. I’m going to pick one of the languages to play with it (Scala or Haskell?) and I’ll probably read the book again in a few months. This week I went back to a non-coding book and started reading <a href="http://amzn.com/1934356581">Agile Samurai</a> by Jonathan Rasmusson.</p>
+
+<p>This weekend I will be finishing up preparing for my four month review on Monday. The last couple of months have been awesome, with an acceleration of my learning mid-way through, and I’m excited to present it to the team.</p>
+
+<p>Next week: Review, working in a smaller team, Kissmetrics and Trunkboards version 2.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: week 17]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-17/"/>
+    <updated>2012-06-22T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-week-17</id>
+    <content type="html"><![CDATA[<p>This week I started and finished the Kissmetrics project that was assigned to me. Pairing with Mike on Monday helped get me started and after that it was just a matter of going through the stories that were assigned to me one by one. We’re also improving our testing methodology and testing earlier in the week, testing with the product manager both locally as soon as possible and on staging after the weekly code freeze. Of course some things were not working while testing. Sometimes the logic hadn’t been thought through, and sometimes my environment wasn’t set up properly for testing. And throughout the week we were getting feedback from end-users that meant changes in the specifications. But I am happy that even with all these bumps on the road I managed to deliver the finished project on time for the release.</p>
+
+<!-- more -->
+
+
+<p>I’m also getting more comfortable with releasing, using apache, figuring out log files and understanding errors. While I may never become a dev-ops, I do want to master that area of expertise so that I can help with it whenever necessary. I’m using heroku for the moment for my side/learning-project but as soon as the mvp is live I want to move it to AWS or Linode and learn how to deploy and maintain applications on a VPS.</p>
+
+<p>Finally, I’m getting ready for my four-month review, coming up soon on July 2nd. I’ll be at the office this weekend working on the presentation itself and the web application that I will be demoing. I’m nervous but also excited because while the last two months have been very busy, I feel like I didn’t get enough apprenticeship tasks done. At the same time, I really turned a corner: things make sense, learning is easier and faster, and I’m so much more productive. I’ll continue working on making a great presentation next week.</p>
+
+<p>Also next week: Implementing Iron workers on Trunkboard, using Redis better for performance, fixing sales report bugs before the end of the month.</p>
+]]></content>
+  </entry>
+  
+</feed>

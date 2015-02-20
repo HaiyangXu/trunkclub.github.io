@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Trunk Club - Tech Blog]]></title>
+  <link href="http://techblog.trunkclub.com/atom.xml" rel="self"/>
+  <link href="http://techblog.trunkclub.com/"/>
+  <updated>2015-02-20T18:03:58+00:00</updated>
+  <id>http://techblog.trunkclub.com/</id>
+  <author>
+    <name><![CDATA[Trunk Club]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Front-end composition at Trunk Club]]></title>
+    <link href="http://techblog.trunkclub.com/front-end-composition-at-trunk-club/"/>
+    <updated>2015-02-20T11:50:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/front-end-composition-at-trunk-club</id>
+    <content type="html"><![CDATA[<p>As the Web shifts from a web of content as we’ve known it to an application platform there’s been a renewed emphasis on <a href="http://addyosmani.com/blog/architecture-on-the-road-to-2015/">composition in web app architecture</a>. To manage composition in our Web UIs at Trunk Club we use a number of techniques and patterns to help scale our suite of rich-clients while avoiding duplication of common componentry. This article will discuss some of the patterns we use, describe the concept of a component library and introduce software for sharing modules between apps without use of WebPack or Browserify.</p>
+
+<blockquote><p>Learn how to use JS modules and a simple component library to share code in a forward-looking way.</p></blockquote>
+
+<!-- more -->
+
+
+<p>After building <a href="https://github.com/trunkclub/brunch-with-panache">Brunch With Panache</a> and using it to stand up a number of fat-client apps we started seeing duplication in our domain models and other common application components. For example, each of our front-end apps requires use of a <em>User</em> model, a <em>SecureController</em> and a <em>LoginView</em>. Sharing common modules in this manner has traditionally required use of machinery like Browserify or WebPack, or, depending on the circumstances, manual duplication or a clever task-runner set-up with <a href="http://gruntjs.com/">Grunt</a>, <a href="http://gulpjs.com/">Gulp</a> or <a href="https://github.com/broccolijs/broccoli">Broccoli</a>.</p>
+
+<p>To remove duplication from our front-end applications and to allow for shared components we created <a href="https://github.com/trunkclub/brunch-with-coalescence">Brunch with Coalescence</a>, a Brunch-based <a href="http://bower.io/">Bower</a> component suited for storing reusable CJS, ES6 modules, and CSS for use in among apps. The primary goals are thusly:</p>
+
+<ul>
+<li>Limit interruption to existing Brunch app development workflows</li>
+<li>Avoid unnecessary architectural complexity</li>
+<li>Build upon current CommonJS module architecture, while planning forward for dynamic modules with ES6</li>
+</ul>
+
+
+<p>Given most of our existing fat-clients use Brunch and a <a href="https://github.com/trunkclub/brunch-with-panache/tree/1.0.0/jakelib">custom set of Jake tasks</a> we leveraged the existing <a href="http://jakejs.com/">Jake</a> CLI (part of the <a href="https://github.com/jupl/btc">Brunch Toolchain</a>) to limit interruption to the existing dev workflow — allowing common components built with <em>Coalescence</em> to be built in a consistent and familiar way.</p>
+
+<p>To avoid introducing unnecessary architectural complexity <em>Coalescence</em> forgoes the use of <a href="http://webpack.github.io/">WebPack</a> or <a href="http://browserify.org/">Browserify</a> and, instead, taps directly into the consuming apps’ Brunch build pipelines using <a href="https://github.com/trunkclub/brunch-with-coalescence/wiki/How-To-integrate-with-Brunch-with-Panache">a symlink and a Bower component</a>) — distributing pre-compiled source for later transpilation. The advantage of distributing precompiled and not using other tools here is less cognitive overhead, less code to manage and a streamlined, forward-looking development process.</p>
+
+<p>As a result of pre-compiled distribution it’s possible to prototype changes to shared components within the apps themselves, copy those changes back to the component library and avoid working simultaneously in two repos. Additionally, existing CommonJS modules and Mocha tests are liftable, meaning they can be dropped from any <em>Panache</em> app straight into <em>Coalescence </em>and Just Work™.</p>
+
+<p>We’ve included the Babel transpiler to enable creation of ES6 modules to tee up for AMD-style dynamic module loading and protocol-level bundling with <a href="https://github.com/systemjs/systemjs">SystemJS</a> and the imminent HTTP/2 protocol. For further reading on this approach, please see the <em>Future ES6 Loader Bundling Scenarios</em> section of <a href="http://guybedford.com/practical-workflows-for-es6-modules">Practical Workflows for ES6 Modules</a>.</p>
+
+<p>The following figure is an abstract representation of how <em>Coalesence</em> (i.e. <em>Core</em>) fits into our front-end architecture:</p>
+
+<p><img src="../images/core.png" alt="Coalescence as a Core for Apps" /></p>
+
+<p>In the center we have a <em>Core</em> surrounded by a number of <em>App</em>, each of which requires access to shared functionality. The <em>Core</em> itself is a separate entity but is consumed by each <em>App</em> — resulting in shared code. Bear in mind not everything is suitable for the <em>Core</em>. Applying Pareto’s principle, in which anything a few (20 percent) are vital and many (80 percent) are trivial, strive for <em>Core</em> to compose approximately one-fifth of your app.</p>
+
+<p>Shown to the sides of the <em>Core</em> are examples of web components. The components may live inside <em>Core</em>, the consuming <em>App</em> or come from a <a href="http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps/">dynamically loaded vendor library</a>, NPM module or Bower component. Because both  likely to be used in multiple apps in multiple contexts, and are good candidates for reuse in a component library.</p>
+
+<p>We’re excited for the road ahead with ES6 modules and the benefits of simplicity of design, and are looking forward to continuing to innovate while we build our way through 2015.</p>
+
+<p>For additional reading on <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> please see the following previous posts and information:</p>
+
+<ul>
+<li><a href="https://speakerdeck.com/jhabdas/brunch-with-panache">Slides from May 14th HTML5 Meetup BWP talk at Trunk Club</a></li>
+<li><a href="http://slides.com/jhabdas/brunch-with-panache#/">Brunch with Panache: Consistency, Simplicity, Style</a></li>
+<li><a href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/">Brunch With Panache 0.9.0 Released</a></li>
+<li><a href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/">Brunch With Panache 0.8.4 Released</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What's Your Most Controversial Technical Opinion?]]></title>
+    <link href="http://techblog.trunkclub.com/whats-your-most-controversial-technical-opinion/"/>
+    <updated>2014-11-04T16:49:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/whats-your-most-controversial-technical-opinion</id>
+    <content type="html"><![CDATA[<p>At Trunk Club, I think one of the most specialized and skilled tasks we perform is finding more engineers to work with us. Hiring is one of the most difficult things we do around here, and it’s one of the most important areas I can contribute towards. There’s already a pretty decent amount of material out there on how to hire people in technology, some of my favorite coming from <a href="http://www.joelonsoftware.com/articles/GuerrillaInterviewing3.html">Joel Spolsky</a> and <a href="https://sites.google.com/site/steveyegge2/five-essential-phone-screen-questions">Steve Yegge</a>. However, I think sometimes we’re too quick to decide technical chops are paramount, and little else matters if you find somebody with a solid technical ability.</p>
+
+<!-- more -->
+
+
+<p>How do you hire for non-technical ability? What even matters when it comes to “soft” skills? Unfortunately, I think a lot of people end up leaving it to “gut feel”. I hate to consider that thought. Decisions like whether or not to bring somebody on to your team should be more calculated. This is somebody’s career we’re talking about! The furthest I’ve been able to take the idea is: will I enjoy spending the weekday with this person? It’s not concrete, but at least it feels less like I’m leaving it up to my subconscious Eight Ball.</p>
+
+<p>When trying to judge for soft skills, my favorite goto question is, “What’s your most controversial technical opinion?” It’s usually followed by a short moment of awkward silence as the candidate considers something they probably didn’t prepare for. Then I usually hear something rarely all that controversial. Something like, “test driven development isn’t appropriate all of the time”, or, “sometimes the hacky solution is the right solution”. That’s ok, I bet they’d have a more controversial answer if they felt like they had more time.</p>
+
+<p>While writing this I realized I rarely remember what specific opinion the candidate even voices. It’s really not that important… hell, I typically don’t even hold it against the candidate if I think they’re wrong. What’s important is the conversation that follows that question. I get to don my innocently-ignorant hat, or perhaps my asshole-contrarian hat. I’m really interested to see how solidly the candidate sticks with their controversial opinion. Does the candidate fold like a deck of cards or stubbornly stand by their opinion even as the opposing case mounts?</p>
+
+<p>I like the question because it helps you paint a picture about what it’s like to work with the candidate, and in a way that watching them write code might miss. Will they tell me when I’m making a poor decision? Are they open to counter points when arguing for a specific approach? Is it engaging when they disagree with me, or just painful? Will they enrich my day at the office, or will they tax it to no benefit? These are all questions just as important to me as ones that uncover a candidate’s technical expertise.</p>
+
+<p>At the end of the day, I want to be careful not to voice some recipe for success in hiring. I don’t think such a thing exists. That’s probably my not-so-controversial controversial opinion. I think there’s no good substitute for continually making smart decisions again and again, and hiring is no exception. Questions like mine help to introduce more moving parts, and with those moving parts come additional opportunities to gain insight and learn about the candidate. In other words, they give you some extra chances to make smart decisions when hiring the next member of your team.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brunch with Panache 0.9.0 Released]]></title>
+    <link href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/"/>
+    <updated>2014-10-18T18:08:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released</id>
+    <content type="html"><![CDATA[<p>Trunk Club released last week a new version of the front-end seed we use to develop our rich web clients. <a href="https://github.com/trunkclub/brunch-with-panache/tree/0.9.0">Brunch with Panache v0.9.0</a> is the first release to enable full-stack JS development using Node.js and <a href="http://hapijs.com/">Hapi</a>, making it even easier to build the single-page app you always wanted. Creating <a href="https://github.com/jhabdas/hopstop/blob/ratchet/server/index.coffee#L9-L19">reverse proxies</a> is simple, and there are <a href="http://hapijs.com/plugins">plenty of plug-ins</a> for use in scaling. Deploying with <a href="https://www.docker.com/">Docker</a>? Check out the new Docker integration. See below for details.</p>
+
+<h2>Features</h2>
+
+<p>In plain English (mostly).</p>
+
+<ul>
+<li>Improved page load speed. Perceived page load time with Elastic Search is about 250ms.</li>
+<li>Autoprefixes CSS for faster Sass development without <a href="http://bourbon.io/">Bourbon</a>.</li>
+<li>Run experiments faster than ever with the new Scaffold generator and other web component enhancements.</li>
+<li>Now capable of running as a daemon in Docker using <a href="https://github.com/trunkclub/bwp-docker">bwp-docker</a>.</li>
+<li>Build more ambitious, full-stack JS web applications.</li>
+<li>Better automated testing facilities for easier CI integration and confident application deployments.</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>What&rsquo;s new <a href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/">since 0.8.4</a></h2>
+
+<p>Give me the deets.</p>
+
+<ul>
+<li>Closed <a href="https://github.com/trunkclub/brunch-with-panache/issues?state=closed">4 issues</a>, and made a number of other small bugfixes and enhancements. (<a href="https://github.com/trunkclub/brunch-with-panache/compare/trunkclub:0.8.4...0.9.0">view diff</a>)</li>
+<li>Removed dependency on Ruby by favoring a C-based version of Sass called <a href="https://github.com/sass/libsass">libasss</a>. BWP no longer relies on Ruby.</li>
+<li>Provides a Hapi server. If it&rsquo;s <a href="http://thechangelog.com/116/">good enough for Black Friday</a>, it&rsquo;s good enough for us.</li>
+<li>Improved Scaffold generator to allows new pages to be created in a single <a href="http://jakejs.com/">Jake</a> task: <code>jake g scaffold=user</code>.</li>
+<li>Fixes a bug in the <code>server:dev</code> and <code>server:prod</code> Jake tasks.</li>
+<li><code>npm start</code> now compiles the app for <code>--production</code> and runs with Hapi while watching for changes to app source.</li>
+<li>Provides out of the box support for <a href="https://github.com/elving/swag">Swag</a> for use with <a href="handlebarsjs.com">Handlebars</a> and can be removed with <code>jake rem:swag</code>.</li>
+<li>Some issues with the <a href="http://karma-runner.github.io/0.12/index.html">Karma</a> test runner have been fixed up, so <code>jake test:all</code> works like a charm.</li>
+<li>Browser Detect added. Now unit tests run not just thru <a href="http://phantomjs.org/">PhantomJS</a>, but all system-detected browsers.</li>
+<li>Fixed a deep-dependency issue causing source maps debugging to go haywire on OS X when <code>ulimit -n 10000</code>.</li>
+<li>Use <a href="https://github.com/trunkclub/bwp-docker">bwp-docker</a> to start a running instance of BWP with Docker in seconds.</li>
+</ul>
+
+
+<h2>Upgrading</h2>
+
+<p>To upgrade existing BWP apps from <code>0.8.4</code> to <code>0.9.0</code>, set <code>brunch-with-panache</code> as your <strong>upstream</strong>, merge in <code>tags/0.9.0</code>, resolve any merge conflicts and test your application. Once the new upstream is merged, run the following commands to update your <code>npm</code> dependencies and restart the server like so:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ jake npm:clean # rm -rf node_modules && npm cache clean
+</span><span class='line'>$ npm install
+</span><span class='line'>$ jake server:dev # runs Hapi server and watches for changes (with Source Maps)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please see the <a href="https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md">ChangeLog</a> for more details.</p>
+
+<h2>A closer look at generators</h2>
+
+<p>BWP is designed to minimize redundant tasks. Generators help immensely in that regard, saving time. Which is why we&rsquo;re proud BWP comes with a collection of built-in generators. To see what&rsquo;s available simply run <code>jake generate</code> (aliased with <code>jake gen</code> and <code>jake g</code>) at the terminal from within the project directory for a listing of what&rsquo;s possible.</p>
+
+<p>As of this version, BWP supports the following generators:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ jake gen
+</span><span class='line'>List of available generators in ./generators:
+</span><span class='line'> * code-test (Test file for code testing)
+</span><span class='line'> * collection (Chaplin collection and unit test)
+</span><span class='line'> * collection-view (Chaplin collection view and unit test)
+</span><span class='line'> * controller (Chaplin controller and unit test)
+</span><span class='line'> * model (Chaplin model and unit test)
+</span><span class='line'> * scaffold (Chaplin Collection View, Controller, Actions and Routes)
+</span><span class='line'> * site-test (Test file for site testing)
+</span><span class='line'> * view (Chaplin view and unit test)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A powerful generator is the scaffold generator, which combines together other generators to form a simple package for quickly prototyping new concepts. Here&rsquo;s what it&rsquo;ll do:</p>
+
+<ul>
+<li>Takes a dasherized-string-literal (singular form) as an input name creates files</li>
+<li>Creates a Model and a Collection (inflection is automatic) using the name provided</li>
+<li>Creates a named View and a Collection View, and their respective Handlebars template files</li>
+<li>Stubs out unit test files for the above</li>
+<li>Creates a new controller and connects everything together using a <code>index</code> and a <code>show</code> action</li>
+<li>Updates <code>routes.coffee</code>, enabling instant available navigation to the new page</li>
+</ul>
+
+
+<p>Here&rsquo;s the sample output from the Scaffold generator, which takes about a second to run. These files would otherwise be created by hand, leading to less consistency and wasted effort.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ jake g scaffold=user
+</span><span class='line'>29 Oct 00:26:00 - info: create app/models/user.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: init test/code/models
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user/templates
+</span><span class='line'>29 Oct 00:26:00 - info: create app/models/users.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: init test/code/models
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user/templates
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user/templates
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/views/user.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user
+</span><span class='line'>29 Oct 00:26:00 - info: init app/views/user
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/models/user-test.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/user-view.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/templates/user-item.hbs
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/views/user-test.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: appending to app/routes.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/controllers/user-controller.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create test/code/models/users-test.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/user-collection-view.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/user-item-view.coffee
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/templates/user.hbs
+</span><span class='line'>29 Oct 00:26:00 - info: create app/views/user/templates/user-collection.hbs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you need to be more surgical about the way you work, the individual scaffolding tools will cover a majority of your needs. Generators can easily be customized to create widget factories, making it easy to implement commonly-used components.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: The Beginning]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-the-beginning/"/>
+    <updated>2014-09-05T12:01:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-the-beginning</id>
+    <content type="html"><![CDATA[<p>The first week of Trunk Club was a bit of a blur. There was a lot to take in. There were many more people and the office space was much bigger than I expected. On top of a new environment, there were a lot of new technologies and a completely different architecture than I had seen before. My head was spinning.</p>
+
+<p>The day I graduated Dev Bootcamp, I felt… exhausted more than anything (I spent a full week catching up on sleep), but I felt like I could conquer anything. When I started getting to know the developers at Trunk Club and actually digging through the code, that feeling was a bit shaken. It can be a little mind melting to think about how much there is to learn. Plus, it was hard not to be impressed by how much everyone seemed to know. It was wizardry and magic everywhere! That’s why I got into this industry, though. I love getting to learn what’s really happening under all that magic.</p>
+
+<p>My job for the first week was to get situated and start getting things set up on my laptop. That was not a small task.  I didn’t realized how much went on behind the scenes to make the entire business run. I think what surprised me the most was that they don’t work on just one monolithic application. They have been in the process of moving to a <a href="http://martinfowler.com/articles/microservices.html">microservice architecture</a>, which means their software is broken up into several separate pieces that work together. I was going to have to learn how to get the pieces I needed onto my local environment (my computer) and get them talking to each other.</p>
+
+<!-- more -->
+
+
+<p>Like many startups, they use GitHub as their collaboration tool. For those who have never used <a href="https://github.com/about">GitHub</a> or know what <a href="http://git-scm.com/doc">git</a> is, git is a source code management system. The great thing about it is that if you commit (save to this system) the changes you make, you will have a history of your changes and if anything goes wrong, you can rollback your changes. GitHub is a site for you to store your code and save your git history (a history of any changes to the code) so that others can see and make changes to the code as well.</p>
+
+<p>With over 100 repositories, essentially folders on GitHub that hold a project, the first thing to do was to figure which ones to pull and get running locally. I was added as a member of Trunk Club on GitHub and began the week of downloads. I started pretty confidently, but like most things in software, it always takes longer than you think. So. many. errors. It took me a couple of days to work through all the random issues. Some of it was things like working with FactoryGirl (used to create scenarios for testing code),
+<code>FactoryGirl.create(:employee, :email =&gt; "username@trunkclub.com", :role =&gt; "Technology")</code>.
+I had “technology” instead of “Technology”. I learned that you can only use either <a href="http://rvm.io/">RVM</a> or <a href="https://github.com/sstephenson/rbenv">rbenv</a> to manage your rubies and if you want to switch, you have to completely remove the other manager. I even learned a little bit about how the different apps and APIs talk to each other. Hello, <a href="http://nginx.com/">nginx</a> (which can be a whole other blog post on its own).</p>
+
+<p>I think the most important habit I decided to be religious about was taking a notebook with me everywhere I went. It can be surprisingly difficult to keep track of everything you have worked on in a day. One of the best things I was given on my first day at work was a lovely leather bound journal. At first, I couldn’t think of what I would use it for. Then I went to my first stand up.</p>
+
+<p>If you’ve never attended a stand up before, it’s just a short meeting that should last less than 15 minutes in which everyone on the team says what they worked on yesterday, what they will work on today, and if they have any blockers. Typically they’re held on a daily basis. It is a great way for everyone on a team to know what other people are working on, ask for help, and product managers find out relatively quickly when there is an issue that might affect the project timeline.</p>
+
+<p>Stand ups are where you need to remember what you’ve done. Once I started writing down the things I was working on, I was not only able to give a better description of what I was actually doing there, but I started to actually retain information (or at least some of it). If you’re just starting out, I highly recommend taking notes either as you go through the day. If you happen to be the type that never took notes in school because your memory is just that awesome, I suggest documenting issues you’ve run into that could benefit the next new person. It can be hard to find time to spend on documentation, but it’s one of the most useful tools. Of course as soon as I write that, I asked our engineering intern about how amazingly useful note taking is, expecting him to validate everything I just wrote, and he tells me he never writes anything down. Thanks, Ansh. Well, everyone has their own methods. Just don’t be afraid to keep a notebook of commands you might forget, context around something you will be working on, or very importantly, things you commit to doing.</p>
+
+<p>My first week at Trunk Club was a really exciting week. There is a lot to learn, but I am surrounded by incredibly smart people, each as nice and as willing to help as the next, and  feel lucky to be at a company filled with people that seem to genuinely like their jobs. How do you not love a place that treats you during the day?</p>
+
+<p><img src="http://i.imgur.com/jDd2VP6l.jpg" alt="Gelato!" /></p>
+
+<p>To really kick things off, we had a Tech Team outing at the end of the week. Behold, bubble soccer! Not as easy at it looks, but every bit as amazing.</p>
+
+<p><img src="http://i.imgur.com/kSEBeoKl.jpg" alt="bubble soccer" /></p>
+
+<p>If this is any indicator of how my apprenticeship is going to go, I have a lot to look forward to!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: An Introduction]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-an-introduction/"/>
+    <updated>2014-09-03T17:09:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-an-introduction</id>
+    <content type="html"><![CDATA[<p>Before I start writing about Trunk Club, I should probably introduce myself since I am a relatively new face around here.</p>
+
+<p>I started at Trunk Club as a developer apprentice towards the end of June. I am the only one at the moment, but hopefully there may be others in the near future! My background is in Economics and Information Systems, and I worked as a .NET developer for a few months before deciding to go to Dev Bootcamp. I didn’t have enough experience to really succeed at my first job (I only took one programming course in college), so I needed to find something that would help me improve. Dev Bootcamp was the perfect solution for me, and I had an insanely good time going through the program. Not long after finishing there, I was able to get my job here as an apprentice (hooray!!).</p>
+
+<p>My apprenticeship is 6 months with a review every 2 months. We break up our work into 2 week chunks, which we call sprints, so we decided that I will rotate teams every 2 sprints. As part of my apprenticeship, we thought it would be helpful if I could blog about what I’ve been learning each sprint. I’ll post blogs from the last few sprints over the next couple of weeks.</p>
+
+<p>I’m hoping that sharing some of my experiences will be useful for anyone just starting out, or thinking about becoming a developer. I love my job and ultimately, that’s what I want to share. I feel incredibly lucky to have landed where I have, and even more excited to see where the next several months take me!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brunch with Panache 0.8.4 Released]]></title>
+    <link href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/"/>
+    <updated>2014-07-14T12:43:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released</id>
+    <content type="html"><![CDATA[<p>Trunk Club released today a new version of the front-end seed we use to develop our web clients. With <a href="https://github.com/trunkclub/brunch-with-panache/tree/0.8.4">release 0.8.4</a> the following new features have become available for immediate use:</p>
+
+<h2>What&rsquo;s new</h2>
+
+<ul>
+<li>Closed <a href="https://github.com/trunkclub/brunch-with-panache/issues?state=closed">13 issues</a>, including 2 bugs and 11 enhancements.</li>
+<li>Added file fingerprinting for static assets in <code>index.html</code> to enable cache busting of primary application assets.</li>
+<li>Express server was added to allow for more ambitious applications. Just run <code>jake server:dev</code> after installing.</li>
+<li><a href="https://github.com/elving/swag">Swag Handlebars helpers</a> now available and enabled by default.</li>
+<li>Fixed a bug in the Jake <code>test:code</code> task. <code>npm test</code> and <code>test:all</code> now both function as expected.</li>
+<li>Karma test runner now auto-detects and uses available browsers for unit testing.</li>
+<li>Unit and site testing capabilities moved under Jake task called <code>test:install</code>, allowing for faster development installations.</li>
+<li>Easier-to-use environment variables as <a href="https://github.com/trunkclub/brunch-with-panache/blob/0.8.4/README.md#coffeeenv">documented in the README</a>.</li>
+<li>New Jake tasks for cleaning up locally cached Node and Bower dependencies.</li>
+<li>Removed the <em>page-view</em> generator in favor of the <em>scaffold</em> generator.</li>
+<li>Various application and development dependency updates.</li>
+</ul>
+
+
+<h2>Upgrading</h2>
+
+<p>To upgrade existing BWP apps, set <code>brunch-with-panache</code> as your <strong>upstream</strong>, merge in <code>tags/0.8.4</code>, resolve any merge conflicts and test your application.</p>
+
+<p>See the <a href="https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md">ChangeLog</a> for more details.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Avoiding Front-End SPOF in Single-Page Apps]]></title>
+    <link href="http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps/"/>
+    <updated>2014-07-08T18:24:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps</id>
+    <content type="html"><![CDATA[<p>A couple years back Steve Souders gave a great talk at Fluent Conf titled <em>Your Script Just Killed My Site</em> (<a href="https://www.youtube.com/watch?v=aHDNmTpqi7w">video</a>). During the talk Steve explained front-end <abbr title="Single Point of Failure">SPOF</abbr> and pointed towards <a href="http://blog.patrickmeenan.com/2011/10/testing-for-frontend-spof.html">a nice tool</a> for detecting it. Fast-forward a couple of years and front-end SPOF is still a concern in web development. And, when building a single-page app, SPOF is an even bigger deal as it can cause an entire web app to become unresponsive, putting users at the mercy of the browser to download and execute 3rd-party scripts prior to bootstrapping. Read on to learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP).</p>
+
+<blockquote><p>Learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, Brunch with Panache</p></blockquote>
+
+<!-- more -->
+
+
+<p>Avoiding front-end SPOF in a single-page app like those created with BWP is relatively simple, but often flies in the face of what 3rd parties suggest in their implementation guides. Here&rsquo;s the typical site integration approach advocated by many 3rd parties, even today:</p>
+
+<ol>
+<li>Insert our script into the HEAD or BODY of your main template. We should be first. Or last.</li>
+<li>Don&rsquo;t worry, our response times are really, really fast.</li>
+<li>And we&rsquo;re using a script-loader with, ajax so everything will be fast.</li>
+</ol>
+
+
+<p>I&rsquo;ve seen this approach advocated for a slew of products including Google Analytics, Typekit, BrightTag, Test and Target, Bazaarvoice, and it&rsquo;s very misleading. If you&rsquo;re dropping a SCRIPT tag into your template markup, and the <a href="https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded"><code>DOMContentLoaded</code></a> event hasn&rsquo;t fired yet, you&rsquo;re primed for SPOF. I&rsquo;ve seen tiny script-loaders cause upwards of 20 second page load times. There&rsquo;s a better way.</p>
+
+<p>If you&rsquo;re building a single-page app the solution is simple, wait until the app begins to initialize before calling scripts, and call them all in a <a href="http://calendar.perfplanet.com/2012/the-non-blocking-script-loader-pattern/">non-blocking manner</a> from the application&rsquo;s own JS.</p>
+
+<p>To avoid SPOF in <a href="https://github.com/trunkclub/brunch-with-panache">BWP</a> single-page applications, simply do the following:</p>
+
+<ul>
+<li>For each <code>script</code> with an <code>href</code> attribute, move the URL provided to <code>initialize.coffee</code> and load them asynchronously. If using jQuery or Zepto, this <a href="http://davidwalsh.name/loading-scripts-jquery">can be done</a> using <code>$.getScript</code> and <code>$.get</code>, respectively. If you&rsquo;re not using either of those libraries simply build or borrow <a href="https://gist.github.com/colingourlay/7209131">something similar</a> to load the files in a non-blocking fashion.</li>
+<li>For any <code>script</code> that runs a script-loader, embed that code into <code>initialize.coffee</code> and you&rsquo;re all set.</li>
+</ul>
+
+
+<p>If you experience any issues with browsers that are not evergreen like Chrome and Firefox just ask the magic StackOverflow, or look into browser quirks (no, I&rsquo;m not referring to IE&rsquo;s venerable quirks mode).</p>
+
+<p>Below is a sample of the <code>initialize.coffee</code> file used in one of our major production applications at Trunk Club, showing how we load our analytics provider as well as web fonts:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="s">&#39;use strict&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">utils = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;lib/utils&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">initialize = </span><span class="nf">-&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Add Analytics for tracking with Segment.io</span>
+</span><span class='line'>  <span class="o">`</span>
+</span><span class='line'>  <span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="o">||</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="o">=</span><span class="p">[]),</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;identify&quot;</span><span class="p">,</span><span class="s">&quot;track&quot;</span><span class="p">,</span><span class="s">&quot;trackLink&quot;</span><span class="p">,</span><span class="s">&quot;trackForm&quot;</span><span class="p">,</span><span class="s">&quot;trackClick&quot;</span><span class="p">,</span><span class="s">&quot;trackSubmit&quot;</span><span class="p">,</span><span class="s">&quot;page&quot;</span><span class="p">,</span><span class="s">&quot;pageview&quot;</span><span class="p">,</span><span class="s">&quot;ab&quot;</span><span class="p">,</span><span class="s">&quot;alias&quot;</span><span class="p">,</span><span class="s">&quot;ready&quot;</span><span class="p">,</span><span class="s">&quot;group&quot;</span><span class="p">,</span><span class="s">&quot;on&quot;</span><span class="p">,</span><span class="s">&quot;once&quot;</span><span class="p">,</span><span class="s">&quot;off&quot;</span><span class="p">],</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">factory</span><span class="o">=</span><span class="nx">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span><span class="k">return</span> <span class="nx">function</span><span class="p">(){</span><span class="nx">var</span> <span class="nx">t</span><span class="o">=</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span><span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="nx">a</span><span class="p">),</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">t</span><span class="p">),</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">}};</span><span class="k">for</span><span class="p">(</span><span class="nx">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">methods</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span><span class="nx">var</span> <span class="nx">method</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">methods</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">[</span><span class="nx">method</span><span class="p">]</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="nx">method</span><span class="p">)}</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">load</span><span class="o">=</span><span class="nx">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span><span class="nx">var</span> <span class="nx">t</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s">&quot;script&quot;</span><span class="p">);</span><span class="nx">t</span><span class="p">.</span><span class="nx">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">,</span><span class="nx">t</span><span class="p">.</span><span class="nx">async</span><span class="o">=!</span><span class="mi">0</span><span class="p">,</span><span class="nx">t</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="p">(</span><span class="s">&quot;https:&quot;</span><span class="o">===</span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="o">?</span><span class="s">&quot;https://&quot;</span><span class="o">:</span><span class="s">&quot;http://&quot;</span><span class="p">)</span><span class="o">+</span><span class="s">&quot;d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/&quot;</span><span class="o">+</span><span class="nx">a</span><span class="o">+</span><span class="s">&quot;/analytics.min.js&quot;</span><span class="p">;</span><span class="nx">var</span> <span class="nx">n</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;script&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="nx">n</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="nx">n</span><span class="p">)},</span><span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">SNIPPET_VERSION</span><span class="o">=</span><span class="s">&quot;2.0.6&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nb">window</span><span class="p">.</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">utils</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">regexes</span><span class="p">.</span><span class="nx">origin</span><span class="p">.</span><span class="nx">prod</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span><span class="p">)</span> <span class="o">?</span> <span class="s">&quot;44yg1der8p&quot;</span> <span class="o">:</span> <span class="s">&quot;moz42de0rp&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="o">`</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Add Typekit for web font support</span>
+</span><span class='line'>  <span class="o">`</span>
+</span><span class='line'>  <span class="p">(</span><span class="nx">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">var</span> <span class="nv">config = </span><span class="p">{</span>
+</span><span class='line'>      <span class="nv">kitId: </span><span class="s">&#39;led3rp&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nv">scriptTimeout: </span><span class="mi">3000</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">h</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">,</span><span class="nx">t</span><span class="o">=</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">function</span><span class="p">(){</span><span class="nx">h</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="nx">h</span><span class="p">.</span><span class="nx">className</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\bwf-loading\b/g</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s">&quot; wf-inactive&quot;</span><span class="p">;},</span><span class="nx">config</span><span class="p">.</span><span class="nx">scriptTimeout</span><span class="p">),</span><span class="nx">tk</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s">&quot;script&quot;</span><span class="p">),</span><span class="nx">f</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span><span class="nx">s</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s">&quot;script&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="nx">a</span><span class="p">;</span><span class="nx">h</span><span class="p">.</span><span class="nx">className</span><span class="o">+=</span><span class="s">&quot; wf-loading&quot;</span><span class="p">;</span><span class="nx">tk</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="s">&#39;//use.typekit.net/&#39;</span><span class="o">+</span><span class="nx">config</span><span class="p">.</span><span class="nx">kitId</span><span class="o">+</span><span class="s">&#39;.js&#39;</span><span class="p">;</span><span class="nx">tk</span><span class="p">.</span><span class="nx">async</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span><span class="nx">tk</span><span class="p">.</span><span class="nx">onload</span><span class="o">=</span><span class="nx">tk</span><span class="p">.</span><span class="nx">onreadystatechange</span><span class="o">=</span><span class="nx">function</span><span class="p">(){</span><span class="nx">a</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">readyState</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="nx">f</span><span class="o">||</span><span class="nx">a</span><span class="o">&amp;&amp;</span><span class="nx">a</span><span class="o">!=</span><span class="s">&quot;complete&quot;</span><span class="o">&amp;&amp;</span><span class="nx">a</span><span class="o">!=</span><span class="s">&quot;loaded&quot;</span><span class="p">)</span><span class="k">return</span><span class="p">;</span><span class="nx">f</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span><span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span><span class="k">try</span><span class="p">{</span><span class="nx">Typekit</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">config</span><span class="p">)}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){}};</span><span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">tk</span><span class="p">,</span><span class="nx">s</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">})(</span><span class="nb">document</span><span class="p">);</span>
+</span><span class='line'>  <span class="o">`</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Add Davy promises if available and we are using Exoskeleton</span>
+</span><span class='line'>  <span class="k">if</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Deferred</span> <span class="o">and</span> <span class="nx">Davy</span><span class="o">?</span>
+</span><span class='line'>    <span class="nv">Backbone.Deferred = </span><span class="nf">-&gt;</span>
+</span><span class='line'>      <span class="k">new</span> <span class="nx">Davy</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Start application</span>
+</span><span class='line'>  <span class="nv">Application = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;application&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">new</span> <span class="nx">Application</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Initialize the application on DOM ready event.</span>
+</span><span class='line'><span class="c1"># Use jQuery if available. Otherwise use native.</span>
+</span><span class='line'><span class="k">if</span> <span class="nx">$</span><span class="o">?</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="nx">initialize</span><span class="p">)</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s">&#39;DOMContentLoaded&#39;</span><span class="p">,</span> <span class="nx">initialize</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Tip:</strong> Don&rsquo;t forget to add the <code>'use strict'</code> as shown above to enforce strict mode on the embedded JS.</p>
+
+<p>And if you&rsquo;ve <a href="https://github.com/brunch/coffeelint-brunch">enabled CoffeeLint</a> (you are linting, aren&rsquo;t you?), you can omit linting of <code>initialize.coffee</code> by updating the <a href="https://github.com/brunch/brunch/blob/master/docs/config.md"><code>brunch-config.js</code></a> with a negative-lookahead assertion like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">coffeelint</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">pattern</span><span class="o">:</span> <span class="sr">/^app\/(?!initialize).*\.coffee$/</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Questions? Just let us know.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Look Inside Trunk Club Product Design by InVision]]></title>
+    <link href="http://techblog.trunkclub.com/look-inside-trunk-club-product-design-invision/"/>
+    <updated>2014-05-21T15:20:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/look-inside-trunk-club-product-design-invision</id>
+    <content type="html"><![CDATA[<p><img src="../images/010-Invision_TrunkClub.jpg" alt="Members of the Trunk Club Design Team" /></p>
+
+<p>We’re excited to have been interviewed by our favorite rapid prototyping app, <a href="http://www.invisionapp.com/">InVision</a>. Read their article on the InVision Blog here: <a href="http://blog.invisionapp.com/a-look-inside-design-at-trunk-club/">A Look Inside Design at Trunk Club</a>.</p>
+
+<p>At Trunk Club, rapid prototyping plays a crucial role in our design process for both our internal and external apps. Our early iterations on products never start off perfect. InVision is the quickest way we test and learn about whether or not ideas are going down the right path.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Open sourcing our code style guide]]></title>
+    <link href="http://techblog.trunkclub.com/open-sourcing-our-code-style-guide/"/>
+    <updated>2014-04-30T20:02:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/open-sourcing-our-code-style-guide</id>
+    <content type="html"><![CDATA[<p>Over the last year TC has been standardizing on coding styles to help us achieve a goal originally seen in one of Mark Otto&rsquo;s repos.</p>
+
+<blockquote><p>All code in the codebase should look like a single person typed it, no matter how many people contribute.</p></blockquote>
+
+<p>No doubt an idealistic goal, a couple of things are needed to achieve this:</p>
+
+<ul>
+<li>A well promoted style guide</li>
+<li>Something to aspire to (<em>Error:</em> Maximum call stack size exceeded.)</li>
+</ul>
+
+
+<p>During a talk at Fluent Conf this year one of the speakers encouraged attendees to open source their style guides. Similar to open source software, having an open source style guide is a great way for individuals and companies to give back to the communities which helped them grow. And so it is with great pleasure Trunk Club opens <a href="https://github.com/trunkclub/styleguide">our style guide</a>, currently with standards on CoffeeScript, HTML, CSS and SASS and plenty of room for growth.</p>
+
+<p>Items introduced to the style guide are intended to meet one end, and that&rsquo;s a single voice, recognizable to everyone. Please let us know if you have questions. And thanks for being awesome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chaplin Collection Views Using CSS Transitions]]></title>
+    <link href="http://techblog.trunkclub.com/chaplin-collection-views-using-css-transitions/"/>
+    <updated>2014-03-02T13:43:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/chaplin-collection-views-using-css-transitions</id>
+    <content type="html"><![CDATA[<p>My team at work is currently porting an e-commerce SPA from an older framework over to <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP), our open source development framework for web clients. Like the old framework, BWP uses both Backbone and CoffeeScript. But to make composing applications easier BWP kicks it up a notch and adds in Chaplin, giving us Collection Views.</p>
+
+<p>One of the downsides with the out-of-the-box Collection Views provided with Chaplin is that they use JavaScript-based animation to fade-in the item views once the collection has been fetched. And while this may be OK for many applications, it&rsquo;s not ideal for apps with pages which have many collection views, or for mobile user agents in general.</p>
+
+<!-- more -->
+
+
+<p>After a quick look through <a href="http://docs.chaplinjs.org/chaplin.collection_view.html">Chaplin.CollectionView</a> I noticed a property called <code>useCssAnimation</code>. The default value of this property was set to <code>false</code>. Time to search GitHub for some inspiration&hellip;</p>
+
+<p>A quick search for <code>"useCssAnimation:"</code> resulted in a number of hits. But <a href="https://github.com/molefrog/steviewhale/blob/0f665a4b77daa2023db5ebf5809c3b54b50d6931/app/views/shot/grid/shotGridView.coffee">one of them</a> in particular caught my eye, because I recognized it was using a library I&rsquo;d been experimenting with called <a href="https://github.com/daneden/animate.css">animate.css</a>. And I knew testing it out would be a cinch.</p>
+
+<p>Given BWP is geared for developer productivity, here&rsquo;s all that was needed to make the switch to use <em>animate.css</em> to replace the JS-based <code>CollectionView</code> animation behavior:</p>
+
+<ol>
+<li>With <code>jake watch:dev</code> running (and nginx pointing at the app&rsquo;s <code>public</code> directory)</li>
+<li>Run a <code>bower install --save animate.css</code></li>
+<li><p>Open the <code>collection-view.coffee</code> and add the following two properties to the object prototype:</p>
+
+<p> <code>useCssAnimation: true # flag to enable use of CSS animations</code>
+ <code>animationStartClass: "animated fadeIn" # provides CSS fade-in animation</code></p></li>
+</ol>
+
+
+<p>Test, commit and that&rsquo;s it! The project now uses CSS animations to replace the more sluggish and processor intensive JavaScript animations Chaplin provides by default.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[On speaking at js.chi()]]></title>
+    <link href="http://techblog.trunkclub.com/on-speaking-at-js-chi/"/>
+    <updated>2013-10-23T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/on-speaking-at-js-chi</id>
+    <content type="html"><![CDATA[<h2>Getting a speaking engagement</h2>
+
+<p>I&rsquo;ve been attending talks presented by the <a href="http://www.meetup.com/js-chi/">js.chi() meetup group</a> for several years now. I&rsquo;ve always respected those that presented, regardless of how well assembled their presentations were. And after having personally benefitted from a number of talks (not to mention free food and beer!) I felt it was time to give back.</p>
+
+<p>After learning many of the ins and outs of CoffeeScript, Backbone, <a href="http://brunch.io/">Brunch</a> and <a href="http://chaplinjs.org/">Chaplin</a> I felt I had something unique to offer a crowd of listeners. And so I reached out to <a href="https://twitter.com/wondible">Justin Love</a> and threw my name in for a possible speaking engagement. And after some time, Justin reached out and asked if I was still up for giving a talk. The answer was yes, and so a talk was scheduled.</p>
+
+<!-- more -->
+
+
+<h2>Prep work leading up to the talk</h2>
+
+<p>One thing I look for in talks I listen to are takeaways. And so leading up to <a href="http://www.meetup.com/js-chi/events/132710002/">the talk</a> I spend a good deal of time putting together examples to help showcase some of the technologies and tools I&rsquo;d be discussing which people could take home and study and play around with themselves. The goal was not to leave the audience with not just a <a href="https://speakerdeck.com/jhabdas/hopstop">sleek-looking slide deck</a> but also examples tied together with a <a href="https://github.com/jhabdas/hopstop">full-blown example application</a>. So during the days and weeks leading up to the talk (which I hope to give again at other venues), I added a number of upgrades and new features to the app, which also helped solidify my understanding of what I&rsquo;d be speaking about.</p>
+
+<h2>Delivering to the crowd</h2>
+
+<p>While I&rsquo;ve spoken to crows before, by no means am I a seasoned speaker. There were some butterflies. But rather than letting anxiety work against me, I turned it into positive energy and used it to do the best job I could. And in the minutes leading up to the talk I simply focused on how the information I delivered could change the way the audience worked, ideally to improve developer productivity and happiness. (Note: The beer I had just prior to the speech didn&rsquo;t hurt either.)</p>
+
+<h2>The after effects</h2>
+
+<p>Before giving the talk, I&rsquo;d expected that, after it was over, I&rsquo;d be content and move on. But what really happened surprised me. After the talk was over I simply wished I could do it for a larger crowd. Instead of 100 people, why not shoot for 250 or more? Perhaps even a conference at some point. And so my hope is to continue delivering talks in the future to front-end developers and hobbyists alike who love the craft and are eager to learn. And if you&rsquo;re thinking about speaking but are not comfortable with the idea but think you might like it, just try it and find out. It&rsquo;s good to push yourself to the edge and beyond. You never know, someday it could be you behind the podium giving the keynote.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Moving from Tumblr to Octopress]]></title>
+    <link href="http://techblog.trunkclub.com/moving-from-tumblr-to-octopress/"/>
+    <updated>2013-09-20T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/moving-from-tumblr-to-octopress</id>
+    <content type="html"><![CDATA[<p>At Trunk Club, we love technology. It&rsquo;s at the core of our business and helps enable us to provide amazing user experiences both internally and externally. So, when asked recently to help provide opinion on our tech blog, I was excited for opportunity&mdash;until I saw the blog was hosted on Tumblr.</p>
+
+<p>What&rsquo;s wrong with Tumblr? Nothing, really, except that, as an engineer who&rsquo;s been maintaining a technical blog for the last 5 years, I found it difficult to voice an opinion on a platform I myself didn&rsquo;t fully embrace&mdash;to me it was just another CMS, and a bit restrictive at that. So before writing this post, I felt compelled to move our tech blog away from Tumblr. Read on to learn about the Octopress migration, and how to set up a wicked quick, CMS-free blog with free hosting and then some.</p>
+
+<!-- more -->
+
+
+<h2>CMS blogs don&rsquo;t feel quite as fast</h2>
+
+<p>Based on personal experiences with CMS-driven blogs like <a href="http://www.habdas.org/drupal-7-for-wordpress-admins/">WordPress and Drupal</a>, going CMS-free was the first requirement. This was primarily a performance play, as CMS-driven sites, even Wordpress with W3 Total Cache, CloudFront and any number of performance tweaks simply can&rsquo;t compete with a static site witout a jauggernaut of an app server behind it. There was no second requirement. (Assume the obvious.)</p>
+
+<p>At Trunk Club we write a lot of Ruby and CoffeeScript. So it seemed fitting we should chose a blog which leverages one of those technologies. After looking briefly at Jekyll, I noticed Octopress. And after looking at Octopress, I noticed it could be hosted on GitHub pages&mdash;for free&mdash;and be build by Travis-CI (also for free). That&rsquo;s a  lot of free, so let&rsquo;s briefly recap what we&rsquo;re building:</p>
+
+<ul>
+<li>Open source site to help illustrate how Trunk Club uses <a href="http://octopress.org/">Octopress</a></li>
+<li>Blog is of the CMS-free variety and based on the wonderful <a href="https://www.ruby-lang.org/">Ruby language</a></li>
+<li>Hosting righ tnow is free thanks to <a href="http://pages.github.com/">GitHub Pages</a></li>
+<li>Continuous Integration using <a href="https://travis-ci.org/">Travis-CI</a></li>
+<li>Support for <a href="http://prose.io/">Prose.io</a>, to simplify post authoring and enable blogging from a desktop or mobile web browser</li>
+<li>Integration with the 37signals&#8217; Campfire to post build notifications</li>
+</ul>
+
+
+<h2>Found just what I was looking for</h2>
+
+<p>After some searching I was able to unearth enough material to lead me to reverse engineer what was being done, resulting in a <a href="http://www.gliffy.com/go/publish/4845414">system diagram</a> I could use to illustrate how the whole thing worked. Feedback on the whole concept was positive, so I started building. After a bit of trial and error given different approaches, I ended up finding the following excellent article, which boils most of the setup process into a small number of easily reproducable steps:</p>
+
+<p><a href="http://rogerz.github.io/blog/2013/02/21/prose-io-github-travis-ci/">Octopress+Prose+Github+Travis CI = Coders&#8217; Blog</a></p>
+
+<h2>Adjustments to the above to make it all work</h2>
+
+<p>The above instructions were less than a year old, but alone would not work for me. Please note the additional steps needed for me to get <a href="http://www.gliffy.com/go/publish/4845414">the whole thing</a> working properly.</p>
+
+<h3>Enabling online post authoring, web and mobile web</h3>
+
+<p>The <a href="https://github.com/prose/prose/wiki/Prose-Configuration">Prose configuration</a> had to be modified for allow for post authoring. Here&rsquo;s at an early Trunk Club configuration:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># prose.io settings
+</span><span class='line'># https://github.com/prose/prose/wiki/Prose-Configuration
+</span><span class='line'>prose:
+</span><span class='line'>  rooturl: 'source/_posts'
+</span><span class='line'>  siteurl: 'http://techblog.trunkclub.com'
+</span><span class='line'>  media: 'assets'
+</span><span class='line'>  metadata:
+</span><span class='line'>    source/_posts:
+</span><span class='line'>      - name: "layout"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "hidden"
+</span><span class='line'>          value: "post"
+</span><span class='line'>      - name: "title"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "text"
+</span><span class='line'>          label: "Title"
+</span><span class='line'>          value: ""
+</span><span class='line'>          type: "text"
+</span><span class='line'>      - name: "author"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "text"
+</span><span class='line'>          label: "Author"
+</span><span class='line'>          value: ""
+</span><span class='line'>          placeholder: "Trunk Botterson"
+</span><span class='line'>          type: "text"
+</span><span class='line'>      - name: "categories"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "multiselect"
+</span><span class='line'>          label: "Post Category"
+</span><span class='line'>          placeholder: "Create or choose"
+</span><span class='line'>          alterable: true
+</span><span class='line'>      - name: "comments"
+</span><span class='line'>        field:
+</span><span class='line'>          element: checkbox
+</span><span class='line'>          label: "Comments"
+</span><span class='line'>          value: "true"
+</span><span class='line'>      - name: "tags"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "multiselect"
+</span><span class='line'>          label: "Add Tags"
+</span><span class='line'>          placeholder: "Choose Tags"
+</span><span class='line'>          alterable: true</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Who&rsquo;s that Travis fellow anyway</h3>
+
+<p>After modifying the <code>Rakefile</code> and <code>.travis.yml</code>, and getting the <a href="https://travis-ci.org/trunkclub/trunkclub.github.io">Travis integration</a> ready, Travis was reporting successful builds although the <code>rake deploy</code> task was failing. I did some digging and was able to turn up a <a href="https://github.com/travis-ci/travis-cookbooks/issues/159#issuecomment-21675873">nice fix</a>, copied here for convenience:</p>
+
+<pre><code>before_install:
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "user@example.com"
+</code></pre>
+
+<h3>Twitter loading, loading, bueller</h3>
+
+<p>With a <code>twitter_user</code> set using the Octopress Unless patched, users with a vanilla Octopress install will notice <em>tweets won&rsquo;t load</em>, the result of an API <a href="https://dev.twitter.com/blog/api-housekeeping">Twitter chose to sunset</a>. Fixing this is as simple as creating a new aside, like the following file added to <code>_includes/custom/asides</code>:</p>
+
+<figure class='code'><figcaption><span>twitter_widget.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>Latest Tweets<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&quot;twitter-timeline&quot;</span> <span class="na">href=</span><span class="s">&quot;https://twitter.com/jhabdas&quot;</span> <span class="na">data-widget-id=</span><span class="s">&quot;382004356658130944&quot;</span><span class="nt">&gt;</span>Tweets by @jhabdas<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script&gt;</span><span class="o">!</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">id</span><span class="p">){</span><span class="kd">var</span> <span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="nx">p</span><span class="o">=</span><span class="sr">/^http:/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">location</span><span class="p">)</span><span class="o">?</span><span class="s1">&#39;http&#39;</span><span class="o">:</span><span class="s1">&#39;https&#39;</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">d</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">)){</span><span class="nx">js</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="nx">js</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">id</span><span class="p">;</span><span class="nx">js</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">p</span><span class="o">+</span><span class="s2">&quot;://platform.twitter.com/widgets.js&quot;</span><span class="p">;</span><span class="nx">fjs</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">js</span><span class="p">,</span><span class="nx">fjs</span><span class="p">);}}(</span><span class="nb">document</span><span class="p">,</span><span class="s2">&quot;script&quot;</span><span class="p">,</span><span class="s2">&quot;twitter-wjs&quot;</span><span class="p">);</span><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When updating asides, don&rsquo;t forget to adjust the asides configuration in <code>source/_config.yml</code>.</p>
+
+<h3>Lazy-loading YouTube videos</h3>
+
+<p>If migrating from a blog with video content hosted on YouTube, check out the <a href="https://github.com/erossignon/jekyll-youtube-lazyloading/"><code>jekyll-youtube-lazyloading</code></a> plug-in, which adds a preview screenshot image to a page and waits for a click event before appending the video <code>iframe</code> to the DOM, resulting in a snappier UI and faster download for pages with YouTube-hosted video content.</p>
+
+<p>Once the plug-in is installed, YouTube videos can be embedded using the <code>youtube</code> liquid tag, así:</p>
+
+<figure class='code'><figcaption><span>twitter_widget.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% youtube f7AU2Ozu8eo %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>So long, Tumblbeasts</h2>
+
+<p>Wrapping things up, I used the <a href="https://github.com/jekyll/jekyll-import">Jekyll import tool</a> to pull the posts from our old tech blog on Tumblr and create simple <code>meta</code> redirects for referrers linking to the rather non-semantic Tumblr URLs, helping prevent linkrot and moving the TC tech blog to a better canonicalized URL structure (and somewhere an SEO guy cheers). Once that was done I modified the Octopress config YAML and post frontmatter, finished up with various copy editing and post migration tasks, including adding the <code>CNAME</code> file and updating the DNS to point to the new home of the Trunk Club Tech Blog. And poof. The new blog came alive.</p>
+
+<p>Let the blogging begin.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Programming on the Command Line]]></title>
+    <link href="http://techblog.trunkclub.com/programming-on-the-command-line/"/>
+    <updated>2013-05-15T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/programming-on-the-command-line</id>
+    <content type="html"><![CDATA[<h2>The command line is your friend</h2>
+
+<p>Recently it dawned on me that one of the most useful things I’ve learned since college was actually one of the older technologies when it comes to computers: the unix command line and how to “program” using it.</p>
+
+<!-- more -->
+
+
+<h2>How is CLI programming</h2>
+
+<p>What I’ve always heard referred to as “Taco Bell ® Programming” is the art of combining several commands to acheive something much more powerful. This is nothing crazy, we’ve probably all tailed a filed and piped (|) it to grep before, that makes you a taco bell ® programmer. For those of you who have never done that, let me explain. tailing a file, simply means that your display is constantly being updated with the contents of the file. This is very useful when you want to see the contents of a log file. But many times when you’re looking for something in a log file, you don’t want or need to see every line of that file, you’ve logged much more than you need to troubleshoot this issue. This is where grep comes in, it allows you to only show the lines of a body of text that contain a phrase you’re looking for. Here’s an example where I’m following my production log file and looking for the lines that contain “Publishing Message”:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tail -f production.log | grep <span class="s1">&#39;&#39;</span>Publishing message<span class="s1">&#39;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That’s just the begining of how the command line can be useful. Let’s say that this message returns us a lot of lines that looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Publishing</span> <span class="ss">message</span><span class="p">:</span> <span class="ss">exchange</span><span class="p">:</span> <span class="n">member_example_event</span><span class="p">,</span> <span class="ss">opts</span><span class="p">:</span> <span class="p">{</span><span class="ss">:headers</span><span class="o">=&gt;</span><span class="p">{</span><span class="s2">&quot;message_id&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;message2&quot;</span><span class="p">}},</span> <span class="ss">message</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">:123456,</span><span class="se">\&quot;</span><span class="s2">first_name</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Example</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">last_name</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Member</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">email</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">example.member@example.com</span><span class="se">\&quot;</span><span class="s2">}&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And from these lines we want a list of all the member’s email addresses. How do we do this? Yes, I’m sure most of you are thinking, “Why not write a ruby script?” (where ruby could be any language). Some of you might even be thinking “I can do that in VIM”. (That one would be me). But why not just use the command line? A tool that is already at your disposal? Probably because, you’re not familiar with how to. Let’s do this piece by piece:</p>
+
+<p>First we need to remove the parts of the message we don’t need. To do this, I would use the cut command, which acts much like split in ruby. I’m going to cut on the ‘,’ (-d,) and then take only the parts of the cut line that I want by passing -f6.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tail -f production.log | grep <span class="s1">&#39;&#39;</span>Publishing message<span class="s1">&#39;&#39;</span> | cut -d, -f6
+</span><span class='line'>    <span class="c">#\&quot;email\&quot;:\&quot;example.member@example.com\&quot;}&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, I think I would cut that again on ‘”’ to get to my email address, but this leaves a trailing ‘&#8217;, so I’ll use sed, which is like sub in ruby to remove it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tail -f production.log | grep <span class="s1">&#39;&#39;</span>Publishing message<span class="s1">&#39;&#39;</span> | cut -d, -f6 | cut -d<span class="s1">&#39;&#39;</span><span class="err">&quot;</span><span class="s1">&#39;&#39;</span> -f4 | sed <span class="s1">&#39;&#39;</span>s/<span class="se">\\</span>//<span class="s1">&#39;&#39;</span>
+</span><span class='line'>    <span class="c">#example.member@example.com</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And we’re done! Now we can tail the logs and see on our screen the email addresses for members who have had a message published about them in our system. How would you have accomplished this? Similarly or completely different?</p>
+
+<p>This example may be a bit contrived, however being able to string together a series of unix commands can be very useful, especially if you’re sshed into a server and might not have the ability to create a file, or maybe that server does not have ruby installed.</p>
+
+<p>Why is it called Taco Bell ® Programming?</p>
+
+<p>I cannot take this credit for this and I cannot remember where I first heard this term, but searching the internet shows that it seems to come from <a href="http://teddziuba.com/">Ted Dziuba</a>, but his blog post on it is no longer available. What it comes down to is that most of the food Taco Bell’s ® is made of by combining many of the same ingredients differently. When we’re writing this helper scripts on the command line we’re just combining all of these programs that already exist produce a program that fits our need, each time.</p>
+
+<p>Learning how to use these commands</p>
+
+<p>Personally I find my self just reading man (manual) pages on these apps or googling some examples for them. Another useful linux tool is apropos which can be used to search all available commands and their descriptions.</p>
+
+<p>Some useful links</p>
+
+<ul>
+<li><a href="http://unixhelp.ed.ac.uk/CGI/man-cgi?grep">grep</a></li>
+<li><a href="http://unixhelp.ed.ac.uk/CGI/man-cgi?cut">cut</a></li>
+<li><a href="http://unixhelp.ed.ac.uk/CGI/man-cgi?sed">sed</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[When Life Gives You Racks....]]></title>
+    <link href="http://techblog.trunkclub.com/when-life-gives-you-racks/"/>
+    <updated>2013-02-13T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/when-life-gives-you-racks</id>
+    <content type="html"><![CDATA[<p>build standing pairing stations.</p>
+
+<p>Who am I?</p>
+
+<p>Let me start this post by introducing myself. I’ve been a Software Engineer at <a href="http://trunkclub.com/">Trunk Club</a> for a little over six months and previous to that I was a Senior Software Engineer at <a href="http://drw.com/">DRW Trading</a>. In addition to these full-time jobs I’ve also been involved in a few side projects.</p>
+
+<p>I attended the University of Michigan where I received my degree in computer science. After I graduated there in the winter of 2007 I moved to Chicago to do what any other recent college graduate does, start my career, which is when I started at DRW.</p>
+
+<p>Since then I’ve had the opportunity to learn a variety of different things from a variety of people. These lessons range anywhere from dark text-editor themes being easier on the eyes to using message queuing systems to create a distributed app eco-system. Another such lesson is the benefits of being able to stand while working.</p>
+
+<!-- more -->
+
+
+<p>Getting things done</p>
+
+<p>I’m not going to talk too deeply about the pros and cons of standing and sitting while at work. You can find various articles and blog posts about them (I’ve listed a few at the end). In short, you burn more calories, your back and lower body will hurt less (after getting used to standing more), and even increases in your productivity. And personally, I will tell you that I had the opportunity to experience standing all day, and it’s something that everyone should try.</p>
+
+<p>If you ask any of my current colleagues at Trunk Club they’ll tell you that when I think something is benefinical, I don’t keep my mouth shut. In the past six months due to some of my vocal persistence, the tech team has transitioned towards more consistent pairing throughout the day. As soon as pairing became the daily norm, I turned some of my attention towards being able to stand while we pair. After several converstaions with Mike Wolf, one day we decided that we had to find a way to “test it out”, since purchasing a true standing desk was expensive for something no one else on the team had tried.</p>
+
+<p>Just some racks</p>
+
+<p>MVP then refactor</p>
+
+<p>As is the case with both writing code and a startup, rarely does one end up building the final solution on their first attempt. For developers, we are constantly writing the minimum to get a broken test to pass and then refactoring to a more elegant solution over time. Trunk Club has taken a similar approach to our technology as well. Three years ago our website was nothing more than a WordPress Blog, now we have several different applications supporting our company. And we are constantly making that even better.</p>
+
+<p>But wait, I thought we were talking about standing desks? Yes! We are! Our first foray into the world of standing at work didn’t require an $800 desks that can be moved up and down. (Actually it’s more like $1600 since we pair.)</p>
+
+<p>We took a page out of MacGyver’s play book and built something from what we had all around our office. What was that? baker’s racks, or as we use them, clothing racks. The metal racks with adjustable shelving allowed Mike Wolf and I were able to create Trunk Club’s first standing pairing station.</p>
+
+<p>The standing pairing station is in such high demand, that we’ve constructed a second. After the second version, we’ve begun discussing possible refactorings to our solution, which include buying a version of the aforementioned desks top solutions.</p>
+
+<p>Do you or your team stand on a regular basis? What solution do you use? Want to come see our bakers rack? Drop by TCHQ and check it out while we have beer. Let me know <a href="https://twitter.com/joelash">@joelash</a></p>
+
+<p>Final stading desk</p>
+
+<p>Some links on standing</p>
+
+<p>Here are some of the links I’ve used to validate my personal experiences. I’m more interested in your experiences as opposed to research. Let me know what you think.</p>
+
+<ul>
+<li><a href="http://www.patrickjohnmccrann.com/blog/self-care/sitting-vs-standing-at-work-why-you-need-to-raise-your-working-game">http://www.patrickjohnmccrann.com/blog/self-care/sitting-vs-standing-at-work-why-you-need-to-raise-your-working-game</a></li>
+<li><a href="http://37signals.com/svn/posts/1001-standing-versus-sitting">http://37signals.com/svn/posts/1001-standing-versus-sitting</a></li>
+<li><a href="http://ergonomics.ucla.edu/homepage/back-safety/standing-vs-sitting-at-work.html">http://ergonomics.ucla.edu/homepage/back-safety/standing-vs-sitting-at-work.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My Trunk Club 101 week]]></title>
+    <link href="http://techblog.trunkclub.com/my-trunk-club-101-week/"/>
+    <updated>2013-01-25T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/my-trunk-club-101-week</id>
+    <content type="html"><![CDATA[<p>The tech team came up with a list of tasks that every member of the team should complete in order to better understand the business. Building tools for other functions of the company helps us to understand what those departments do and how we can help them.</p>
+
+<p>I attempted to go through this task list in one week and blog about the experience.</p>
+
+<!-- more -->
+
+
+<p><strong>Operations</strong></p>
+
+<p>I got to fulfill a trunk, pack a trunk and unpack a trunk return. It took me less than an hour to go through it, and it showed me some of the pain points that our ops team is going through, especially as we scale so rapidly.</p>
+
+<p><strong>Sales</strong></p>
+
+<p>One of the most fun tasks was to participate in a training session: Once a week, the sales team picks three items, and creates a scenario for each outfit. These are usually items that sell well but are not often enough put in trunks. For each item we get a member profile: an imaginary member with a specific age, budget, location, profession. My item was a green sweater, and “my guy” lived in Miami and really wanted that green sweater, which I paired with white pants and an orange belt. I got the second most votes for my outfit and actually learned a lot. I need to attend these sessions more often (and win!).
+I also got to participate in a cold call, get a repeat styling, and build a trunk for a customer. (Update: the trunk came back and was a success!! The customer kept several items and the sale was double the average trunk value).</p>
+
+<p><strong>Finance</strong></p>
+
+<p>I went through the process of billing a trunk… I’ve worked a lot with the finance team since I started here, and we’ve made huge progress using technology to simplify tasks. Going through this exercise highlighted even more features we can build for them. 
+Customer Service:
+I answered customer calls, checked out in-person fittings in POS and tracked down delinquent trunks. These guys do an amazing job considering the inefficiencies of some of the tools that they have at their disposal. We can definitely help here.</p>
+
+<p><strong>Merchandising</strong></p>
+
+<p>I participated in a product training meeting, (mock-)ordered a product, and realized how painful it was to enter a new product into Quickbooks.
+Technology:
+I gave a Lunch and Learn entitled “How we’ve been doing our releases (January 2013)” and finally wrote a blog post to round up the task list (you’re reading it).
+This has been very rewarding and enlightening. I’ve already fixed a few issues brought up during my training. Because the business is growing and evolving so fast, I definitely want to go through this list again in a few months. Can’t wait to see how much better we’re doing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Movember + “do the tiger!” (@neilkam)]]></title>
+    <link href="http://techblog.trunkclub.com/movember-do-the-tiger-neilkam/"/>
+    <updated>2012-11-14T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/movember-do-the-tiger-neilkam</id>
+    <content type="html"><![CDATA[<p><img src="../images/tumblr_mdhmmzlicu1rtmj3po1_1280.jpg" alt="rawr" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: week 26]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-26/"/>
+    <updated>2012-09-10T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-week-26</id>
+    <content type="html"><![CDATA[<p>So … it’s been eight weeks since my last blog post. The last blog post I wrote said: “Next week: Review, working in a smaller team, Kissmetrics and Trunkboards version 2.” The review went very well, the second part of my apprenticeship was eye-opening and I definitely felt like I turned a corner. Concepts and patterns were easier to understand, I felt more useful when pairing, and I was able to get more done.</p>
+
+<!-- more -->
+
+
+<p>Teams have been broken down into smaller team focused on specific functions within the company, and I completed the Kissmetrics and Trunkboards v2 projects.</p>
+
+<p>To be honest, the last eight weeks are a big blur. It’s been very intense, a race to the finish to accomplish as much as I could during this apprenticeship. I wish I had blogged more but it was not a priority: If I were to graduate from my apprenticeship and become an engineer, I would no longer have the luxury of being an apprentice, i.e. spending so much time learning. So I made the most of the time I had left.</p>
+
+<p>I had my final review at the end of last month. Everyone from the tech team was there, plus a few people from the product team. I did two presentations: one just for the tech team, highlighting everything that I learned, and a second presentation for the larger group talking about the apprenticeship itself, how I got there and what I got out of it, followed by questions and answers.</p>
+
+<p>It was awesome to list the stuff that I had learned, and also see how much more there was for me to learn. I appreciated getting feedback on my performance and hearing what people thought I should focus on next.</p>
+
+<p>I left the room to let the group discuss what was now my application for an engineering position. I would be leaving for a pre-planned trip to Europe just two days later and would be gone for almost three weeks, so I was eager to hear the outcome of the apprenticeship before leaving. The day after the final review, before a happy hour event with the sales team, I got the great news from Mike Cruz that Trunk Club was offering me a position as a Software Engineer. I’m very happy and excited to have accepted that offer today.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: week 18]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-18/"/>
+    <updated>2012-06-29T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-week-18</id>
+    <content type="html"><![CDATA[<p>Now that felt great: I worked on a project that was very similar to last week’s Kissmetrics project, except this time it took me two days to finish it instead of five! I’m now completing projects regularly and I have code to commit to the release every week. My contribution level is definitely increasing on a weekly basis.</p>
+
+<!-- more -->
+
+
+<p>Part of it is understanding our code base better, but part of it is also having a much smoother workflow. I program, test, commit, present/test with stakeholders with much more ease now, which allows me to focus more on my code. Things are easier with the product team. I feel like I’m more helpful and pro-active with them, and we get more done.</p>
+
+<p>I’m also able to quickly build upon what I have just learned, needing less time to digest. Tuesday night, at the end of the day, I received a request for a feature and was able to get it done just a few hours later. A few weeks ago such time constraints would guarantee not finishing on time, but this one was doable thanks to the projects that I worked on the last few weeks. I feel like I can take on a much wider variety of projects now. I probably just need more time to complete them than others (which I don’t mind taking), and even that is slowly getting better. It’s all about adding more value.</p>
+
+<p>I finished reading Seven Languages in Seven Weeks. I’ll post my notes on Seven Languages shortly, but the short take on it is this: Great book, helped me understand how other languages (non-OO, functional etc.) function, and what the best use for some of them is. Sometimes it was a bit above my level, but never enough not be understandable and useful. I’m going to pick one of the languages to play with it (Scala or Haskell?) and I’ll probably read the book again in a few months. This week I went back to a non-coding book and started reading <a href="http://amzn.com/1934356581">Agile Samurai</a> by Jonathan Rasmusson.</p>
+
+<p>This weekend I will be finishing up preparing for my four month review on Monday. The last couple of months have been awesome, with an acceleration of my learning mid-way through, and I’m excited to present it to the team.</p>
+
+<p>Next week: Review, working in a smaller team, Kissmetrics and Trunkboards version 2.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: week 17]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-17/"/>
+    <updated>2012-06-22T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-week-17</id>
+    <content type="html"><![CDATA[<p>This week I started and finished the Kissmetrics project that was assigned to me. Pairing with Mike on Monday helped get me started and after that it was just a matter of going through the stories that were assigned to me one by one. We’re also improving our testing methodology and testing earlier in the week, testing with the product manager both locally as soon as possible and on staging after the weekly code freeze. Of course some things were not working while testing. Sometimes the logic hadn’t been thought through, and sometimes my environment wasn’t set up properly for testing. And throughout the week we were getting feedback from end-users that meant changes in the specifications. But I am happy that even with all these bumps on the road I managed to deliver the finished project on time for the release.</p>
+
+<!-- more -->
+
+
+<p>I’m also getting more comfortable with releasing, using apache, figuring out log files and understanding errors. While I may never become a dev-ops, I do want to master that area of expertise so that I can help with it whenever necessary. I’m using heroku for the moment for my side/learning-project but as soon as the mvp is live I want to move it to AWS or Linode and learn how to deploy and maintain applications on a VPS.</p>
+
+<p>Finally, I’m getting ready for my four-month review, coming up soon on July 2nd. I’ll be at the office this weekend working on the presentation itself and the web application that I will be demoing. I’m nervous but also excited because while the last two months have been very busy, I feel like I didn’t get enough apprenticeship tasks done. At the same time, I really turned a corner: things make sense, learning is easier and faster, and I’m so much more productive. I’ll continue working on making a great presentation next week.</p>
+
+<p>Also next week: Implementing Iron workers on Trunkboard, using Redis better for performance, fixing sales report bugs before the end of the month.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Trunk Club Apprenticeship: week 16]]></title>
+    <link href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-16/"/>
+    <updated>2012-06-15T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/trunk-club-apprenticeship-week-16</id>
+    <content type="html"><![CDATA[<p>I started working on the Kissmetrics and Leviathan integration this week. It’s the first time that I have worked with our www application. Browsing the code and finding what I’m looking for takes a little bit of help but it’s definitely much less cryptic than I thought. Familiarity with our business and our code base on the API side is definitely helping.</p>
+
+<!-- more -->
+
+
+<p>I also started using Resque for queuing background jobs. That’s another thing that feels really straight-forward now and was difficult to implement a few months ago. We’re sending the data to Kissmetrics asynchronously to reduce the load. This is a good use case for asynchronous jobs and we’ll be looking into more jobs that could use this method and speed up our application.</p>
+
+<p>I finished reading the Sinatra book that I picked up a few weeks ago. I put it down for too long after moving away from the Sinatra app that I was working on but finally finished it. I started reading the next book on my list: <a href="http://amzn.com/193435659X">Seven Languages in Seven Weeks</a> by Bruce Tate. Going through the Ruby chapter was quick, a nice refresher. I’m moving on to IO this weekend.</p>
+
+<p>Next week: finishing the Kissmetrics project, improving Trunkboards and getting ready for my four month review.</p>
+]]></content>
+  </entry>
+  
+</feed>

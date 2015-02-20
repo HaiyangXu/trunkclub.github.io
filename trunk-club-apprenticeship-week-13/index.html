@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Trunk Club Apprenticeship: week 13 - Trunk Club - Tech Blog</title>
+  <meta name="author" content="Trunk Club">
+
+  
+  <meta name="description" content="What a great week: I just built an entire Rails app from scratch for Trunk Club. GeckoBoard was not giving us enough flexibility and the charts were &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-13">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Trunk Club - Tech Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<link rel="dns-prefetch" href="http://use.typekit.com">
+<script type="text/javascript" src="//use.typekit.net/hqi2igq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29434754-3', 'trunkclub.com');
+  ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1>
+    <a href="/">
+      <img alt="Trunk Club" src="//trunkclub-assets.s3.amazonaws.com/site-assets/logos/tc-wordmark-black.png">
+      <span class="isHiddenVisually">Trunk Club - Tech Blog</span>
+    </a>
+  </h1>
+  
+    <h2>Engineering</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="techblog.trunkclub.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Trunk Club Apprenticeship: Week 13</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-25T00:00:00+00:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jean Bahnik</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>What a great week: I just built an entire Rails app from scratch for Trunk Club. GeckoBoard was not giving us enough flexibility and the charts were too big for the largest widget size allowed. So I more or less built a custom version of GeckoBoards for Trunk Club.</p>
+
+<!-- more -->
+
+
+<p>Thanks to the Sinatra app that I built last week it was easy to just get the data by calling the API that we used to push data to GeckoBoards. After the initial setup, I spent a big part of the week on implementing Highcharts (fun) and I spent the other part of the week working on the look and feel of the app with SASS (more fun). And I also implemented a feature to send a daily email in the morning to stakeholder so that they see yesterday’s KPIs on their way to work, a feature to export a dashboard to pdf to share it with others, and authentication through Devise using our employee database. Woo!</p>
+
+<p>I keep feeling like I need less help. I still get stuck but not against a wall, just slowly making progress and eventually getting there. However, the week was pretty long and I haven’t been really good at pacing myself or doing apprenticeship tasks such as reading and bogging. I think it’s ok every now and then but I don’t want to get burned out either.</p>
+
+<p>Next week: resuming blogging, moving on to another project, planning for four months apprenticeship review.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jean Bahnik</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-25T00:00:00+00:00" pubdate data-updated="true">May 25<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/apprenticeship/'>apprenticeship</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-13/" data-via="TrunkClubTech" data-counturl="http://techblog.trunkclub.com/trunk-club-apprenticeship-week-13/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/trunk-club-apprenticeship-week-12/" title="Previous Post: Trunk Club Apprenticeship: week 12">&laquo; Trunk Club Apprenticeship: week 12</a>
+      
+      
+        <a class="basic-alignment right" href="/trunk-club-apprenticeship-week-14/" title="Next Post: Trunk Club Apprenticeship: week 14">Trunk Club Apprenticeship: week 14 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/front-end-composition-at-trunk-club/">Front-end Composition at Trunk Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/whats-your-most-controversial-technical-opinion/">What's Your Most Controversial Technical Opinion?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/brunch-with-panache-0-dot-9-0-released/">Brunch With Panache 0.9.0 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/trunk-club-apprenticeship-the-beginning/">Trunk Club Apprenticeship: The Beginning</a>
+      </li>
+    
+      <li class="post">
+        <a href="/trunk-club-apprenticeship-an-introduction/">Trunk Club Apprenticeship: An Introduction</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <a class="twitter-timeline" href="https://twitter.com/TrunkClubTech" data-widget-id="378028276679049217">Tweets by @TrunkClubTech</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/trunkclub">@trunkclub</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'trunkclub',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Trunk Club -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'trunkclubtech';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

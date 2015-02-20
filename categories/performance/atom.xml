@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: performance | Trunk Club - Tech Blog]]></title>
+  <link href="http://techblog.trunkclub.com/categories/performance/atom.xml" rel="self"/>
+  <link href="http://techblog.trunkclub.com/"/>
+  <updated>2015-02-20T18:03:58+00:00</updated>
+  <id>http://techblog.trunkclub.com/</id>
+  <author>
+    <name><![CDATA[Trunk Club]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Avoiding Front-End SPOF in Single-Page Apps]]></title>
+    <link href="http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps/"/>
+    <updated>2014-07-08T18:24:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps</id>
+    <content type="html"><![CDATA[<p>A couple years back Steve Souders gave a great talk at Fluent Conf titled <em>Your Script Just Killed My Site</em> (<a href="https://www.youtube.com/watch?v=aHDNmTpqi7w">video</a>). During the talk Steve explained front-end <abbr title="Single Point of Failure">SPOF</abbr> and pointed towards <a href="http://blog.patrickmeenan.com/2011/10/testing-for-frontend-spof.html">a nice tool</a> for detecting it. Fast-forward a couple of years and front-end SPOF is still a concern in web development. And, when building a single-page app, SPOF is an even bigger deal as it can cause an entire web app to become unresponsive, putting users at the mercy of the browser to download and execute 3rd-party scripts prior to bootstrapping. Read on to learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP).</p>
+
+<blockquote><p>Learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, Brunch with Panache</p></blockquote>
+
+<!-- more -->
+
+
+<p>Avoiding front-end SPOF in a single-page app like those created with BWP is relatively simple, but often flies in the face of what 3rd parties suggest in their implementation guides. Here&rsquo;s the typical site integration approach advocated by many 3rd parties, even today:</p>
+
+<ol>
+<li>Insert our script into the HEAD or BODY of your main template. We should be first. Or last.</li>
+<li>Don&rsquo;t worry, our response times are really, really fast.</li>
+<li>And we&rsquo;re using a script-loader with, ajax so everything will be fast.</li>
+</ol>
+
+
+<p>I&rsquo;ve seen this approach advocated for a slew of products including Google Analytics, Typekit, BrightTag, Test and Target, Bazaarvoice, and it&rsquo;s very misleading. If you&rsquo;re dropping a SCRIPT tag into your template markup, and the <a href="https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded"><code>DOMContentLoaded</code></a> event hasn&rsquo;t fired yet, you&rsquo;re primed for SPOF. I&rsquo;ve seen tiny script-loaders cause upwards of 20 second page load times. There&rsquo;s a better way.</p>
+
+<p>If you&rsquo;re building a single-page app the solution is simple, wait until the app begins to initialize before calling scripts, and call them all in a <a href="http://calendar.perfplanet.com/2012/the-non-blocking-script-loader-pattern/">non-blocking manner</a> from the application&rsquo;s own JS.</p>
+
+<p>To avoid SPOF in <a href="https://github.com/trunkclub/brunch-with-panache">BWP</a> single-page applications, simply do the following:</p>
+
+<ul>
+<li>For each <code>script</code> with an <code>href</code> attribute, move the URL provided to <code>initialize.coffee</code> and load them asynchronously. If using jQuery or Zepto, this <a href="http://davidwalsh.name/loading-scripts-jquery">can be done</a> using <code>$.getScript</code> and <code>$.get</code>, respectively. If you&rsquo;re not using either of those libraries simply build or borrow <a href="https://gist.github.com/colingourlay/7209131">something similar</a> to load the files in a non-blocking fashion.</li>
+<li>For any <code>script</code> that runs a script-loader, embed that code into <code>initialize.coffee</code> and you&rsquo;re all set.</li>
+</ul>
+
+
+<p>If you experience any issues with browsers that are not evergreen like Chrome and Firefox just ask the magic StackOverflow, or look into browser quirks (no, I&rsquo;m not referring to IE&rsquo;s venerable quirks mode).</p>
+
+<p>Below is a sample of the <code>initialize.coffee</code> file used in one of our major production applications at Trunk Club, showing how we load our analytics provider as well as web fonts:</p>
+
+<p>``` coffeescript
+&lsquo;use strict&rsquo;</p>
+
+<p>utils = require(&lsquo;lib/utils&rsquo;)</p>
+
+<p>initialize = &ndash;></p>
+
+<p>  # Add Analytics for tracking with Segment.io
+  <code>
+  window.analytics||(window.analytics=[]),window.analytics.methods=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group","on","once","off"],window.analytics.factory=function(a){return function(){var t=Array.prototype.slice.call(arguments);return t.unshift(a),window.analytics.push(t),window.analytics}};for(var i=0;i&lt;window.analytics.methods.length;i++){var method=window.analytics.methods[i];window.analytics[method]=window.analytics.factory(method)}window.analytics.load=function(a){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+a+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},window.analytics.SNIPPET_VERSION="2.0.6",
+  window.analytics.load(utils.app.regexes.origin.prod.test(window.location.hostname) ? "44yg1der8p" : "moz42de0rp");
+ </code></p>
+
+<p>  # Add Typekit for web font support
+  `
+  (function(d) {</p>
+
+<pre><code>var config = {
+  kitId: 'led3rp',
+  scriptTimeout: 3000
+},
+h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&amp;&amp;a!="complete"&amp;&amp;a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+</code></pre>
+
+<p>  })(document);
+  `</p>
+
+<p>  # Add Davy promises if available and we are using Exoskeleton
+  if Backbone.Deferred and Davy?</p>
+
+<pre><code>Backbone.Deferred = -&gt;
+  new Davy
+</code></pre>
+
+<p>  # Start application
+  Application = require(&lsquo;application&rsquo;)
+  new Application</p>
+
+<h1>Initialize the application on DOM ready event.</h1>
+
+<h1>Use jQuery if available. Otherwise use native.</h1>
+
+<p>if $?
+  $(document).ready(initialize)
+else
+  document.addEventListener(&lsquo;DOMContentLoaded&rsquo;, initialize)</p>
+
+<p>```</p>
+
+<p><strong>Tip:</strong> Don&rsquo;t forget to add the <code>'use strict'</code> as shown above to enforce strict mode on the embedded JS.</p>
+
+<p>And if you&rsquo;ve <a href="https://github.com/brunch/coffeelint-brunch">enabled CoffeeLint</a> (you are linting, aren&rsquo;t you?), you can omit linting of <code>initialize.coffee</code> by updating the <a href="https://github.com/brunch/brunch/blob/master/docs/config.md"><code>brunch-config.js</code></a> with a negative-lookahead assertion like so:</p>
+
+<p>``` javascript
+plugins: {
+  coffeelint: {</p>
+
+<pre><code>pattern: /^app\/(?!initialize).*\.coffee$/
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Questions? Just let us know.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chaplin Collection Views Using CSS Transitions]]></title>
+    <link href="http://techblog.trunkclub.com/chaplin-collection-views-using-css-transitions/"/>
+    <updated>2014-03-02T13:43:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/chaplin-collection-views-using-css-transitions</id>
+    <content type="html"><![CDATA[<p>My team at work is currently porting an e-commerce SPA from an older framework over to <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP), our open source development framework for web clients. Like the old framework, BWP uses both Backbone and CoffeeScript. But to make composing applications easier BWP kicks it up a notch and adds in Chaplin, giving us Collection Views.</p>
+
+<p>One of the downsides with the out-of-the-box Collection Views provided with Chaplin is that they use JavaScript-based animation to fade-in the item views once the collection has been fetched. And while this may be OK for many applications, it&rsquo;s not ideal for apps with pages which have many collection views, or for mobile user agents in general.</p>
+
+<!-- more -->
+
+
+<p>After a quick look through <a href="http://docs.chaplinjs.org/chaplin.collection_view.html">Chaplin.CollectionView</a> I noticed a property called <code>useCssAnimation</code>. The default value of this property was set to <code>false</code>. Time to search GitHub for some inspiration&hellip;</p>
+
+<p>A quick search for <code>"useCssAnimation:"</code> resulted in a number of hits. But <a href="https://github.com/molefrog/steviewhale/blob/0f665a4b77daa2023db5ebf5809c3b54b50d6931/app/views/shot/grid/shotGridView.coffee">one of them</a> in particular caught my eye, because I recognized it was using a library I&rsquo;d been experimenting with called <a href="https://github.com/daneden/animate.css">animate.css</a>. And I knew testing it out would be a cinch.</p>
+
+<p>Given BWP is geared for developer productivity, here&rsquo;s all that was needed to make the switch to use <em>animate.css</em> to replace the JS-based <code>CollectionView</code> animation behavior:</p>
+
+<ol>
+<li>With <code>jake watch:dev</code> running (and nginx pointing at the app&rsquo;s <code>public</code> directory)</li>
+<li>Run a <code>bower install --save animate.css</code></li>
+<li><p>Open the <code>collection-view.coffee</code> and add the following two properties to the object prototype:</p>
+
+<p> <code>useCssAnimation: true # flag to enable use of CSS animations</code>
+ <code>animationStartClass: "animated fadeIn" # provides CSS fade-in animation</code></p></li>
+</ol>
+
+
+<p>Test, commit and that&rsquo;s it! The project now uses CSS animations to replace the more sluggish and processor intensive JavaScript animations Chaplin provides by default.</p>
+]]></content>
+  </entry>
+  
+</feed>

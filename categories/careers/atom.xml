@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: careers | Trunk Club - Tech Blog]]></title>
+  <link href="http://techblog.trunkclub.com/categories/careers/atom.xml" rel="self"/>
+  <link href="http://techblog.trunkclub.com/"/>
+  <updated>2015-02-20T18:03:58+00:00</updated>
+  <id>http://techblog.trunkclub.com/</id>
+  <author>
+    <name><![CDATA[Trunk Club]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[We're hiring!]]></title>
+    <link href="http://techblog.trunkclub.com/were-hiring/"/>
+    <updated>2012-01-01T00:00:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/were-hiring</id>
+    <content type="html"><![CDATA[<p>Trunk Club is growing and we’re looking to add talented, passionate, and hungry technologists to the team in Chicago.</p>
+
+<p>We’re building a technology platform that’s changing the way retail works. That means creating products that delight our customers and enable our unique service model to scale seamlessly. Our company is about two years old (and has total headcount of over 90), but our engineering team is small (&lt;10), agile, and generalist-heavy.</p>
+
+<p>Our stack is modern and designed for engineer happiness. We build primarily in Ruby, Coffeescript, HAML/SASS, Backbone.js, and other awesome technologies. We work in fast, iterative development cycles and care deeply about fostering a small, collaborative culture that enables us to do the most fun, impactful work of our careers.  </p>
+
+<p>Trunk Club has raised over $12M in venture capital thus far and is on track for $15M+ in annual revenues this year. Our investors include USVP (lead investors in LivingSocial), Greycroft, Apex, and Anthos. Our board also includes Thomas Ryan, CEO of Threadless, and Stuart Larkins, former SVP at Performics/Doubleclick.</p>
+
+<p>If you’re interested in learning more or just getting connected to talk shop, give us a shout. </p>
+
+<p>Neil Kamireddy</p>
+
+<p><a href="https://twitter.com/neilkam">@neilkam</a>, <a href="mailto:neil@trunkclub.com">neil@trunkclub.com</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,1 +1,711 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Trunk Club - Tech Blog</title>
+  <meta name="author" content="Trunk Club">
+
+  
+  <meta name="description" content="As the Web shifts from a web of content as we’ve known it to an application platform there’s been a renewed emphasis on composition in web app &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://techblog.trunkclub.com">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Trunk Club - Tech Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<link rel="dns-prefetch" href="http://use.typekit.com">
+<script type="text/javascript" src="//use.typekit.net/hqi2igq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29434754-3', 'trunkclub.com');
+  ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1>
+    <a href="/">
+      <img alt="Trunk Club" src="//trunkclub-assets.s3.amazonaws.com/site-assets/logos/tc-wordmark-black.png">
+      <span class="isHiddenVisually">Trunk Club - Tech Blog</span>
+    </a>
+  </h1>
+  
+    <h2>Engineering</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="techblog.trunkclub.com">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/front-end-composition-at-trunk-club/">Front-end Composition at Trunk Club</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-20T11:50:00+00:00" pubdate data-updated="true">Feb 20<span>th</span>, 2015</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As the Web shifts from a web of content as we’ve known it to an application platform there’s been a renewed emphasis on <a href="http://addyosmani.com/blog/architecture-on-the-road-to-2015/">composition in web app architecture</a>. To manage composition in our Web UIs at Trunk Club we use a number of techniques and patterns to help scale our suite of rich-clients while avoiding duplication of common componentry. This article will discuss some of the patterns we use, describe the concept of a component library and introduce software for sharing modules between apps without use of WebPack or Browserify.</p>
+
+<blockquote><p>Learn how to use JS modules and a simple component library to share code in a forward-looking way.</p></blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/front-end-composition-at-trunk-club/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/whats-your-most-controversial-technical-opinion/">What&#8217;s Your Most Controversial Technical Opinion?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-04T16:49:00+00:00" pubdate data-updated="true">Nov 4<span>th</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Ross Bell</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At Trunk Club, I think one of the most specialized and skilled tasks we perform is finding more engineers to work with us. Hiring is one of the most difficult things we do around here, and it’s one of the most important areas I can contribute towards. There’s already a pretty decent amount of material out there on how to hire people in technology, some of my favorite coming from <a href="http://www.joelonsoftware.com/articles/GuerrillaInterviewing3.html">Joel Spolsky</a> and <a href="https://sites.google.com/site/steveyegge2/five-essential-phone-screen-questions">Steve Yegge</a>. However, I think sometimes we’re too quick to decide technical chops are paramount, and little else matters if you find somebody with a solid technical ability.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/whats-your-most-controversial-technical-opinion/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/brunch-with-panache-0-dot-9-0-released/">Brunch With Panache 0.9.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-18T18:08:00+00:00" pubdate data-updated="true">Oct 18<span>th</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Trunk Club released last week a new version of the front-end seed we use to develop our rich web clients. <a href="https://github.com/trunkclub/brunch-with-panache/tree/0.9.0">Brunch with Panache v0.9.0</a> is the first release to enable full-stack JS development using Node.js and <a href="http://hapijs.com/">Hapi</a>, making it even easier to build the single-page app you always wanted. Creating <a href="https://github.com/jhabdas/hopstop/blob/ratchet/server/index.coffee#L9-L19">reverse proxies</a> is simple, and there are <a href="http://hapijs.com/plugins">plenty of plug-ins</a> for use in scaling. Deploying with <a href="https://www.docker.com/">Docker</a>? Check out the new Docker integration. See below for details.</p>
+
+<h2>Features</h2>
+
+<p>In plain English (mostly).</p>
+
+<ul>
+<li>Improved page load speed. Perceived page load time with Elastic Search is about 250ms.</li>
+<li>Autoprefixes CSS for faster Sass development without <a href="http://bourbon.io/">Bourbon</a>.</li>
+<li>Run experiments faster than ever with the new Scaffold generator and other web component enhancements.</li>
+<li>Now capable of running as a daemon in Docker using <a href="https://github.com/trunkclub/bwp-docker">bwp-docker</a>.</li>
+<li>Build more ambitious, full-stack JS web applications.</li>
+<li>Better automated testing facilities for easier CI integration and confident application deployments.</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/brunch-with-panache-0-dot-9-0-released/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/trunk-club-apprenticeship-the-beginning/">Trunk Club Apprenticeship: The Beginning</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-05T12:01:00+00:00" pubdate data-updated="true">Sep 5<span>th</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Amelia Padua</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The first week of Trunk Club was a bit of a blur. There was a lot to take in. There were many more people and the office space was much bigger than I expected. On top of a new environment, there were a lot of new technologies and a completely different architecture than I had seen before. My head was spinning.</p>
+
+<p>The day I graduated Dev Bootcamp, I felt… exhausted more than anything (I spent a full week catching up on sleep), but I felt like I could conquer anything. When I started getting to know the developers at Trunk Club and actually digging through the code, that feeling was a bit shaken. It can be a little mind melting to think about how much there is to learn. Plus, it was hard not to be impressed by how much everyone seemed to know. It was wizardry and magic everywhere! That’s why I got into this industry, though. I love getting to learn what’s really happening under all that magic.</p>
+
+<p>My job for the first week was to get situated and start getting things set up on my laptop. That was not a small task.  I didn’t realized how much went on behind the scenes to make the entire business run. I think what surprised me the most was that they don’t work on just one monolithic application. They have been in the process of moving to a <a href="http://martinfowler.com/articles/microservices.html">microservice architecture</a>, which means their software is broken up into several separate pieces that work together. I was going to have to learn how to get the pieces I needed onto my local environment (my computer) and get them talking to each other.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/trunk-club-apprenticeship-the-beginning/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/trunk-club-apprenticeship-an-introduction/">Trunk Club Apprenticeship: An Introduction</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-03T17:09:00+00:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Amelia Padua</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Before I start writing about Trunk Club, I should probably introduce myself since I am a relatively new face around here.</p>
+
+<p>I started at Trunk Club as a developer apprentice towards the end of June. I am the only one at the moment, but hopefully there may be others in the near future! My background is in Economics and Information Systems, and I worked as a .NET developer for a few months before deciding to go to Dev Bootcamp. I didn’t have enough experience to really succeed at my first job (I only took one programming course in college), so I needed to find something that would help me improve. Dev Bootcamp was the perfect solution for me, and I had an insanely good time going through the program. Not long after finishing there, I was able to get my job here as an apprentice (hooray!!).</p>
+
+<p>My apprenticeship is 6 months with a review every 2 months. We break up our work into 2 week chunks, which we call sprints, so we decided that I will rotate teams every 2 sprints. As part of my apprenticeship, we thought it would be helpful if I could blog about what I’ve been learning each sprint. I’ll post blogs from the last few sprints over the next couple of weeks.</p>
+
+<p>I’m hoping that sharing some of my experiences will be useful for anyone just starting out, or thinking about becoming a developer. I love my job and ultimately, that’s what I want to share. I feel incredibly lucky to have landed where I have, and even more excited to see where the next several months take me!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/brunch-with-panache-0-dot-8-4-released/">Brunch With Panache 0.8.4 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-14T12:43:00+00:00" pubdate data-updated="true">Jul 14<span>th</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Trunk Club released today a new version of the front-end seed we use to develop our web clients. With <a href="https://github.com/trunkclub/brunch-with-panache/tree/0.8.4">release 0.8.4</a> the following new features have become available for immediate use:</p>
+
+<h2>What&rsquo;s new</h2>
+
+<ul>
+<li>Closed <a href="https://github.com/trunkclub/brunch-with-panache/issues?state=closed">13 issues</a>, including 2 bugs and 11 enhancements.</li>
+<li>Added file fingerprinting for static assets in <code>index.html</code> to enable cache busting of primary application assets.</li>
+<li>Express server was added to allow for more ambitious applications. Just run <code>jake server:dev</code> after installing.</li>
+<li><a href="https://github.com/elving/swag">Swag Handlebars helpers</a> now available and enabled by default.</li>
+<li>Fixed a bug in the Jake <code>test:code</code> task. <code>npm test</code> and <code>test:all</code> now both function as expected.</li>
+<li>Karma test runner now auto-detects and uses available browsers for unit testing.</li>
+<li>Unit and site testing capabilities moved under Jake task called <code>test:install</code>, allowing for faster development installations.</li>
+<li>Easier-to-use environment variables as <a href="https://github.com/trunkclub/brunch-with-panache/blob/0.8.4/README.md#coffeeenv">documented in the README</a>.</li>
+<li>New Jake tasks for cleaning up locally cached Node and Bower dependencies.</li>
+<li>Removed the <em>page-view</em> generator in favor of the <em>scaffold</em> generator.</li>
+<li>Various application and development dependency updates.</li>
+</ul>
+
+
+<h2>Upgrading</h2>
+
+<p>To upgrade existing BWP apps, set <code>brunch-with-panache</code> as your <strong>upstream</strong>, merge in <code>tags/0.8.4</code>, resolve any merge conflicts and test your application.</p>
+
+<p>See the <a href="https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md">ChangeLog</a> for more details.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/avoiding-front-end-spof-in-single-page-apps/">Avoiding Front-End SPOF in Single-Page Apps</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-08T18:24:00+00:00" pubdate data-updated="true">Jul 8<span>th</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A couple years back Steve Souders gave a great talk at Fluent Conf titled <em>Your Script Just Killed My Site</em> (<a href="https://www.youtube.com/watch?v=aHDNmTpqi7w">video</a>). During the talk Steve explained front-end <abbr title="Single Point of Failure">SPOF</abbr> and pointed towards <a href="http://blog.patrickmeenan.com/2011/10/testing-for-frontend-spof.html">a nice tool</a> for detecting it. Fast-forward a couple of years and front-end SPOF is still a concern in web development. And, when building a single-page app, SPOF is an even bigger deal as it can cause an entire web app to become unresponsive, putting users at the mercy of the browser to download and execute 3rd-party scripts prior to bootstrapping. Read on to learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP).</p>
+
+<blockquote><p>Learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, Brunch with Panache</p></blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/avoiding-front-end-spof-in-single-page-apps/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/look-inside-trunk-club-product-design-invision/">A Look Inside Trunk Club Product Design by InVision</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-21T15:20:00+00:00" pubdate data-updated="true">May 21<span>st</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kim Ruelo</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="../images/010-Invision_TrunkClub.jpg" alt="Members of the Trunk Club Design Team" /></p>
+
+<p>We’re excited to have been interviewed by our favorite rapid prototyping app, <a href="http://www.invisionapp.com/">InVision</a>. Read their article on the InVision Blog here: <a href="http://blog.invisionapp.com/a-look-inside-design-at-trunk-club/">A Look Inside Design at Trunk Club</a>.</p>
+
+<p>At Trunk Club, rapid prototyping plays a crucial role in our design process for both our internal and external apps. Our early iterations on products never start off perfect. InVision is the quickest way we test and learn about whether or not ideas are going down the right path.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/open-sourcing-our-code-style-guide/">Open Sourcing Our Code Style Guide</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-30T20:02:00+00:00" pubdate data-updated="true">Apr 30<span>th</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over the last year TC has been standardizing on coding styles to help us achieve a goal originally seen in one of Mark Otto&rsquo;s repos.</p>
+
+<blockquote><p>All code in the codebase should look like a single person typed it, no matter how many people contribute.</p></blockquote>
+
+<p>No doubt an idealistic goal, a couple of things are needed to achieve this:</p>
+
+<ul>
+<li>A well promoted style guide</li>
+<li>Something to aspire to (<em>Error:</em> Maximum call stack size exceeded.)</li>
+</ul>
+
+
+<p>During a talk at Fluent Conf this year one of the speakers encouraged attendees to open source their style guides. Similar to open source software, having an open source style guide is a great way for individuals and companies to give back to the communities which helped them grow. And so it is with great pleasure Trunk Club opens <a href="https://github.com/trunkclub/styleguide">our style guide</a>, currently with standards on CoffeeScript, HTML, CSS and SASS and plenty of room for growth.</p>
+
+<p>Items introduced to the style guide are intended to meet one end, and that&rsquo;s a single voice, recognizable to everyone. Please let us know if you have questions. And thanks for being awesome.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/chaplin-collection-views-using-css-transitions/">Chaplin Collection Views Using CSS Transitions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-02T13:43:00+00:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2014</time>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Josh Habdas</span></span>
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My team at work is currently porting an e-commerce SPA from an older framework over to <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP), our open source development framework for web clients. Like the old framework, BWP uses both Backbone and CoffeeScript. But to make composing applications easier BWP kicks it up a notch and adds in Chaplin, giving us Collection Views.</p>
+
+<p>One of the downsides with the out-of-the-box Collection Views provided with Chaplin is that they use JavaScript-based animation to fade-in the item views once the collection has been fetched. And while this may be OK for many applications, it&rsquo;s not ideal for apps with pages which have many collection views, or for mobile user agents in general.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/chaplin-collection-views-using-css-transitions/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/front-end-composition-at-trunk-club/">Front-end Composition at Trunk Club</a>
+      </li>
+    
+      <li class="post">
+        <a href="/whats-your-most-controversial-technical-opinion/">What&#8217;s Your Most Controversial Technical Opinion?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/brunch-with-panache-0-dot-9-0-released/">Brunch With Panache 0.9.0 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/trunk-club-apprenticeship-the-beginning/">Trunk Club Apprenticeship: The Beginning</a>
+      </li>
+    
+      <li class="post">
+        <a href="/trunk-club-apprenticeship-an-introduction/">Trunk Club Apprenticeship: An Introduction</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <a class="twitter-timeline" href="https://twitter.com/TrunkClubTech" data-widget-id="378028276679049217">Tweets by @TrunkClubTech</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/trunkclub">@trunkclub</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'trunkclub',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Trunk Club -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'trunkclubtech';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

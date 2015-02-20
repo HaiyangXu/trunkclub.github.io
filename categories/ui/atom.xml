@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ui | Trunk Club - Tech Blog]]></title>
+  <link href="http://techblog.trunkclub.com/categories/ui/atom.xml" rel="self"/>
+  <link href="http://techblog.trunkclub.com/"/>
+  <updated>2015-02-20T18:03:58+00:00</updated>
+  <id>http://techblog.trunkclub.com/</id>
+  <author>
+    <name><![CDATA[Trunk Club]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Front-end composition at Trunk Club]]></title>
+    <link href="http://techblog.trunkclub.com/front-end-composition-at-trunk-club/"/>
+    <updated>2015-02-20T11:50:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/front-end-composition-at-trunk-club</id>
+    <content type="html"><![CDATA[<p>As the Web shifts from a web of content as we’ve known it to an application platform there’s been a renewed emphasis on <a href="http://addyosmani.com/blog/architecture-on-the-road-to-2015/">composition in web app architecture</a>. To manage composition in our Web UIs at Trunk Club we use a number of techniques and patterns to help scale our suite of rich-clients while avoiding duplication of common componentry. This article will discuss some of the patterns we use, describe the concept of a component library and introduce software for sharing modules between apps without use of WebPack or Browserify.</p>
+
+<blockquote><p>Learn how to use JS modules and a simple component library to share code in a forward-looking way.</p></blockquote>
+
+<!-- more -->
+
+
+<p>After building <a href="https://github.com/trunkclub/brunch-with-panache">Brunch With Panache</a> and using it to stand up a number of fat-client apps we started seeing duplication in our domain models and other common application components. For example, each of our front-end apps requires use of a <em>User</em> model, a <em>SecureController</em> and a <em>LoginView</em>. Sharing common modules in this manner has traditionally required use of machinery like Browserify or WebPack, or, depending on the circumstances, manual duplication or a clever task-runner set-up with <a href="http://gruntjs.com/">Grunt</a>, <a href="http://gulpjs.com/">Gulp</a> or <a href="https://github.com/broccolijs/broccoli">Broccoli</a>.</p>
+
+<p>To remove duplication from our front-end applications and to allow for shared components we created <a href="https://github.com/trunkclub/brunch-with-coalescence">Brunch with Coalescence</a>, a Brunch-based <a href="http://bower.io/">Bower</a> component suited for storing reusable CJS, ES6 modules, and CSS for use in among apps. The primary goals are thusly:</p>
+
+<ul>
+<li>Limit interruption to existing Brunch app development workflows</li>
+<li>Avoid unnecessary architectural complexity</li>
+<li>Build upon current CommonJS module architecture, while planning forward for dynamic modules with ES6</li>
+</ul>
+
+
+<p>Given most of our existing fat-clients use Brunch and a <a href="https://github.com/trunkclub/brunch-with-panache/tree/1.0.0/jakelib">custom set of Jake tasks</a> we leveraged the existing <a href="http://jakejs.com/">Jake</a> CLI (part of the <a href="https://github.com/jupl/btc">Brunch Toolchain</a>) to limit interruption to the existing dev workflow — allowing common components built with <em>Coalescence</em> to be built in a consistent and familiar way.</p>
+
+<p>To avoid introducing unnecessary architectural complexity <em>Coalescence</em> forgoes the use of <a href="http://webpack.github.io/">WebPack</a> or <a href="http://browserify.org/">Browserify</a> and, instead, taps directly into the consuming apps’ Brunch build pipelines using <a href="https://github.com/trunkclub/brunch-with-coalescence/wiki/How-To-integrate-with-Brunch-with-Panache">a symlink and a Bower component</a>) — distributing pre-compiled source for later transpilation. The advantage of distributing precompiled and not using other tools here is less cognitive overhead, less code to manage and a streamlined, forward-looking development process.</p>
+
+<p>As a result of pre-compiled distribution it’s possible to prototype changes to shared components within the apps themselves, copy those changes back to the component library and avoid working simultaneously in two repos. Additionally, existing CommonJS modules and Mocha tests are liftable, meaning they can be dropped from any <em>Panache</em> app straight into <em>Coalescence </em>and Just Work™.</p>
+
+<p>We’ve included the Babel transpiler to enable creation of ES6 modules to tee up for AMD-style dynamic module loading and protocol-level bundling with <a href="https://github.com/systemjs/systemjs">SystemJS</a> and the imminent HTTP/2 protocol. For further reading on this approach, please see the <em>Future ES6 Loader Bundling Scenarios</em> section of <a href="http://guybedford.com/practical-workflows-for-es6-modules">Practical Workflows for ES6 Modules</a>.</p>
+
+<p>The following figure is an abstract representation of how <em>Coalesence</em> (i.e. <em>Core</em>) fits into our front-end architecture:</p>
+
+<p><img src="../images/core.png" alt="Coalescence as a Core for Apps" /></p>
+
+<p>In the center we have a <em>Core</em> surrounded by a number of <em>App</em>, each of which requires access to shared functionality. The <em>Core</em> itself is a separate entity but is consumed by each <em>App</em> — resulting in shared code. Bear in mind not everything is suitable for the <em>Core</em>. Applying Pareto’s principle, in which anything a few (20 percent) are vital and many (80 percent) are trivial, strive for <em>Core</em> to compose approximately one-fifth of your app.</p>
+
+<p>Shown to the sides of the <em>Core</em> are examples of web components. The components may live inside <em>Core</em>, the consuming <em>App</em> or come from a <a href="http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps/">dynamically loaded vendor library</a>, NPM module or Bower component. Because both  likely to be used in multiple apps in multiple contexts, and are good candidates for reuse in a component library.</p>
+
+<p>We’re excited for the road ahead with ES6 modules and the benefits of simplicity of design, and are looking forward to continuing to innovate while we build our way through 2015.</p>
+
+<p>For additional reading on <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> please see the following previous posts and information:</p>
+
+<ul>
+<li><a href="https://speakerdeck.com/jhabdas/brunch-with-panache">Slides from May 14th HTML5 Meetup BWP talk at Trunk Club</a></li>
+<li><a href="http://slides.com/jhabdas/brunch-with-panache#/">Brunch with Panache: Consistency, Simplicity, Style</a></li>
+<li><a href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/">Brunch With Panache 0.9.0 Released</a></li>
+<li><a href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/">Brunch With Panache 0.8.4 Released</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brunch with Panache 0.9.0 Released]]></title>
+    <link href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released/"/>
+    <updated>2014-10-18T18:08:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/brunch-with-panache-0-dot-9-0-released</id>
+    <content type="html"><![CDATA[<p>Trunk Club released last week a new version of the front-end seed we use to develop our rich web clients. <a href="https://github.com/trunkclub/brunch-with-panache/tree/0.9.0">Brunch with Panache v0.9.0</a> is the first release to enable full-stack JS development using Node.js and <a href="http://hapijs.com/">Hapi</a>, making it even easier to build the single-page app you always wanted. Creating <a href="https://github.com/jhabdas/hopstop/blob/ratchet/server/index.coffee#L9-L19">reverse proxies</a> is simple, and there are <a href="http://hapijs.com/plugins">plenty of plug-ins</a> for use in scaling. Deploying with <a href="https://www.docker.com/">Docker</a>? Check out the new Docker integration. See below for details.</p>
+
+<h2>Features</h2>
+
+<p>In plain English (mostly).</p>
+
+<ul>
+<li>Improved page load speed. Perceived page load time with Elastic Search is about 250ms.</li>
+<li>Autoprefixes CSS for faster Sass development without <a href="http://bourbon.io/">Bourbon</a>.</li>
+<li>Run experiments faster than ever with the new Scaffold generator and other web component enhancements.</li>
+<li>Now capable of running as a daemon in Docker using <a href="https://github.com/trunkclub/bwp-docker">bwp-docker</a>.</li>
+<li>Build more ambitious, full-stack JS web applications.</li>
+<li>Better automated testing facilities for easier CI integration and confident application deployments.</li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>What&rsquo;s new <a href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/">since 0.8.4</a></h2>
+
+<p>Give me the deets.</p>
+
+<ul>
+<li>Closed <a href="https://github.com/trunkclub/brunch-with-panache/issues?state=closed">4 issues</a>, and made a number of other small bugfixes and enhancements. (<a href="https://github.com/trunkclub/brunch-with-panache/compare/trunkclub:0.8.4...0.9.0">view diff</a>)</li>
+<li>Removed dependency on Ruby by favoring a C-based version of Sass called <a href="https://github.com/sass/libsass">libasss</a>. BWP no longer relies on Ruby.</li>
+<li>Provides a Hapi server. If it&rsquo;s <a href="http://thechangelog.com/116/">good enough for Black Friday</a>, it&rsquo;s good enough for us.</li>
+<li>Improved Scaffold generator to allows new pages to be created in a single <a href="http://jakejs.com/">Jake</a> task: <code>jake g scaffold=user</code>.</li>
+<li>Fixes a bug in the <code>server:dev</code> and <code>server:prod</code> Jake tasks.</li>
+<li><code>npm start</code> now compiles the app for <code>--production</code> and runs with Hapi while watching for changes to app source.</li>
+<li>Provides out of the box support for <a href="https://github.com/elving/swag">Swag</a> for use with <a href="handlebarsjs.com">Handlebars</a> and can be removed with <code>jake rem:swag</code>.</li>
+<li>Some issues with the <a href="http://karma-runner.github.io/0.12/index.html">Karma</a> test runner have been fixed up, so <code>jake test:all</code> works like a charm.</li>
+<li>Browser Detect added. Now unit tests run not just thru <a href="http://phantomjs.org/">PhantomJS</a>, but all system-detected browsers.</li>
+<li>Fixed a deep-dependency issue causing source maps debugging to go haywire on OS X when <code>ulimit -n 10000</code>.</li>
+<li>Use <a href="https://github.com/trunkclub/bwp-docker">bwp-docker</a> to start a running instance of BWP with Docker in seconds.</li>
+</ul>
+
+
+<h2>Upgrading</h2>
+
+<p>To upgrade existing BWP apps from <code>0.8.4</code> to <code>0.9.0</code>, set <code>brunch-with-panache</code> as your <strong>upstream</strong>, merge in <code>tags/0.9.0</code>, resolve any merge conflicts and test your application. Once the new upstream is merged, run the following commands to update your <code>npm</code> dependencies and restart the server like so:</p>
+
+<p><code>
+$ jake npm:clean # rm -rf node_modules &amp;&amp; npm cache clean
+$ npm install
+$ jake server:dev # runs Hapi server and watches for changes (with Source Maps)
+</code></p>
+
+<p>Please see the <a href="https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md">ChangeLog</a> for more details.</p>
+
+<h2>A closer look at generators</h2>
+
+<p>BWP is designed to minimize redundant tasks. Generators help immensely in that regard, saving time. Which is why we&rsquo;re proud BWP comes with a collection of built-in generators. To see what&rsquo;s available simply run <code>jake generate</code> (aliased with <code>jake gen</code> and <code>jake g</code>) at the terminal from within the project directory for a listing of what&rsquo;s possible.</p>
+
+<p>As of this version, BWP supports the following generators:</p>
+
+<p><code>
+$ jake gen
+List of available generators in ./generators:
+ * code-test (Test file for code testing)
+ * collection (Chaplin collection and unit test)
+ * collection-view (Chaplin collection view and unit test)
+ * controller (Chaplin controller and unit test)
+ * model (Chaplin model and unit test)
+ * scaffold (Chaplin Collection View, Controller, Actions and Routes)
+ * site-test (Test file for site testing)
+ * view (Chaplin view and unit test)
+</code></p>
+
+<p>A powerful generator is the scaffold generator, which combines together other generators to form a simple package for quickly prototyping new concepts. Here&rsquo;s what it&rsquo;ll do:</p>
+
+<ul>
+<li>Takes a dasherized-string-literal (singular form) as an input name creates files</li>
+<li>Creates a Model and a Collection (inflection is automatic) using the name provided</li>
+<li>Creates a named View and a Collection View, and their respective Handlebars template files</li>
+<li>Stubs out unit test files for the above</li>
+<li>Creates a new controller and connects everything together using a <code>index</code> and a <code>show</code> action</li>
+<li>Updates <code>routes.coffee</code>, enabling instant available navigation to the new page</li>
+</ul>
+
+
+<p>Here&rsquo;s the sample output from the Scaffold generator, which takes about a second to run. These files would otherwise be created by hand, leading to less consistency and wasted effort.</p>
+
+<p><code>
+$ jake g scaffold=user
+29 Oct 00:26:00 - info: create app/models/user.coffee
+29 Oct 00:26:00 - info: init test/code/models
+29 Oct 00:26:00 - info: init app/views/user/templates
+29 Oct 00:26:00 - info: create app/models/users.coffee
+29 Oct 00:26:00 - info: init test/code/models
+29 Oct 00:26:00 - info: init app/views/user/templates
+29 Oct 00:26:00 - info: init app/views/user
+29 Oct 00:26:00 - info: init app/views/user/templates
+29 Oct 00:26:00 - info: create test/code/views/user.coffee
+29 Oct 00:26:00 - info: init app/views/user
+29 Oct 00:26:00 - info: init app/views/user
+29 Oct 00:26:00 - info: create test/code/models/user-test.coffee
+29 Oct 00:26:00 - info: create app/views/user/user-view.coffee
+29 Oct 00:26:00 - info: create app/views/user/templates/user-item.hbs
+29 Oct 00:26:00 - info: create test/code/views/user-test.coffee
+29 Oct 00:26:00 - info: appending to app/routes.coffee
+29 Oct 00:26:00 - info: create app/controllers/user-controller.coffee
+29 Oct 00:26:00 - info: create test/code/models/users-test.coffee
+29 Oct 00:26:00 - info: create app/views/user/user-collection-view.coffee
+29 Oct 00:26:00 - info: create app/views/user/user-item-view.coffee
+29 Oct 00:26:00 - info: create app/views/user/templates/user.hbs
+29 Oct 00:26:00 - info: create app/views/user/templates/user-collection.hbs
+</code></p>
+
+<p>When you need to be more surgical about the way you work, the individual scaffolding tools will cover a majority of your needs. Generators can easily be customized to create widget factories, making it easy to implement commonly-used components.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brunch with Panache 0.8.4 Released]]></title>
+    <link href="http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released/"/>
+    <updated>2014-07-14T12:43:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/brunch-with-panache-0-dot-8-4-released</id>
+    <content type="html"><![CDATA[<p>Trunk Club released today a new version of the front-end seed we use to develop our web clients. With <a href="https://github.com/trunkclub/brunch-with-panache/tree/0.8.4">release 0.8.4</a> the following new features have become available for immediate use:</p>
+
+<h2>What&rsquo;s new</h2>
+
+<ul>
+<li>Closed <a href="https://github.com/trunkclub/brunch-with-panache/issues?state=closed">13 issues</a>, including 2 bugs and 11 enhancements.</li>
+<li>Added file fingerprinting for static assets in <code>index.html</code> to enable cache busting of primary application assets.</li>
+<li>Express server was added to allow for more ambitious applications. Just run <code>jake server:dev</code> after installing.</li>
+<li><a href="https://github.com/elving/swag">Swag Handlebars helpers</a> now available and enabled by default.</li>
+<li>Fixed a bug in the Jake <code>test:code</code> task. <code>npm test</code> and <code>test:all</code> now both function as expected.</li>
+<li>Karma test runner now auto-detects and uses available browsers for unit testing.</li>
+<li>Unit and site testing capabilities moved under Jake task called <code>test:install</code>, allowing for faster development installations.</li>
+<li>Easier-to-use environment variables as <a href="https://github.com/trunkclub/brunch-with-panache/blob/0.8.4/README.md#coffeeenv">documented in the README</a>.</li>
+<li>New Jake tasks for cleaning up locally cached Node and Bower dependencies.</li>
+<li>Removed the <em>page-view</em> generator in favor of the <em>scaffold</em> generator.</li>
+<li>Various application and development dependency updates.</li>
+</ul>
+
+
+<h2>Upgrading</h2>
+
+<p>To upgrade existing BWP apps, set <code>brunch-with-panache</code> as your <strong>upstream</strong>, merge in <code>tags/0.8.4</code>, resolve any merge conflicts and test your application.</p>
+
+<p>See the <a href="https://github.com/trunkclub/brunch-with-panache/blob/master/CHANGELOG.md">ChangeLog</a> for more details.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Avoiding Front-End SPOF in Single-Page Apps]]></title>
+    <link href="http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps/"/>
+    <updated>2014-07-08T18:24:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/avoiding-front-end-spof-in-single-page-apps</id>
+    <content type="html"><![CDATA[<p>A couple years back Steve Souders gave a great talk at Fluent Conf titled <em>Your Script Just Killed My Site</em> (<a href="https://www.youtube.com/watch?v=aHDNmTpqi7w">video</a>). During the talk Steve explained front-end <abbr title="Single Point of Failure">SPOF</abbr> and pointed towards <a href="http://blog.patrickmeenan.com/2011/10/testing-for-frontend-spof.html">a nice tool</a> for detecting it. Fast-forward a couple of years and front-end SPOF is still a concern in web development. And, when building a single-page app, SPOF is an even bigger deal as it can cause an entire web app to become unresponsive, putting users at the mercy of the browser to download and execute 3rd-party scripts prior to bootstrapping. Read on to learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP).</p>
+
+<blockquote><p>Learn how to avoid front-end SPOF using Trunk Club&rsquo;s single-page app skeleton, Brunch with Panache</p></blockquote>
+
+<!-- more -->
+
+
+<p>Avoiding front-end SPOF in a single-page app like those created with BWP is relatively simple, but often flies in the face of what 3rd parties suggest in their implementation guides. Here&rsquo;s the typical site integration approach advocated by many 3rd parties, even today:</p>
+
+<ol>
+<li>Insert our script into the HEAD or BODY of your main template. We should be first. Or last.</li>
+<li>Don&rsquo;t worry, our response times are really, really fast.</li>
+<li>And we&rsquo;re using a script-loader with, ajax so everything will be fast.</li>
+</ol>
+
+
+<p>I&rsquo;ve seen this approach advocated for a slew of products including Google Analytics, Typekit, BrightTag, Test and Target, Bazaarvoice, and it&rsquo;s very misleading. If you&rsquo;re dropping a SCRIPT tag into your template markup, and the <a href="https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded"><code>DOMContentLoaded</code></a> event hasn&rsquo;t fired yet, you&rsquo;re primed for SPOF. I&rsquo;ve seen tiny script-loaders cause upwards of 20 second page load times. There&rsquo;s a better way.</p>
+
+<p>If you&rsquo;re building a single-page app the solution is simple, wait until the app begins to initialize before calling scripts, and call them all in a <a href="http://calendar.perfplanet.com/2012/the-non-blocking-script-loader-pattern/">non-blocking manner</a> from the application&rsquo;s own JS.</p>
+
+<p>To avoid SPOF in <a href="https://github.com/trunkclub/brunch-with-panache">BWP</a> single-page applications, simply do the following:</p>
+
+<ul>
+<li>For each <code>script</code> with an <code>href</code> attribute, move the URL provided to <code>initialize.coffee</code> and load them asynchronously. If using jQuery or Zepto, this <a href="http://davidwalsh.name/loading-scripts-jquery">can be done</a> using <code>$.getScript</code> and <code>$.get</code>, respectively. If you&rsquo;re not using either of those libraries simply build or borrow <a href="https://gist.github.com/colingourlay/7209131">something similar</a> to load the files in a non-blocking fashion.</li>
+<li>For any <code>script</code> that runs a script-loader, embed that code into <code>initialize.coffee</code> and you&rsquo;re all set.</li>
+</ul>
+
+
+<p>If you experience any issues with browsers that are not evergreen like Chrome and Firefox just ask the magic StackOverflow, or look into browser quirks (no, I&rsquo;m not referring to IE&rsquo;s venerable quirks mode).</p>
+
+<p>Below is a sample of the <code>initialize.coffee</code> file used in one of our major production applications at Trunk Club, showing how we load our analytics provider as well as web fonts:</p>
+
+<p>``` coffeescript
+&lsquo;use strict&rsquo;</p>
+
+<p>utils = require(&lsquo;lib/utils&rsquo;)</p>
+
+<p>initialize = &ndash;></p>
+
+<p>  # Add Analytics for tracking with Segment.io
+  <code>
+  window.analytics||(window.analytics=[]),window.analytics.methods=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group","on","once","off"],window.analytics.factory=function(a){return function(){var t=Array.prototype.slice.call(arguments);return t.unshift(a),window.analytics.push(t),window.analytics}};for(var i=0;i&lt;window.analytics.methods.length;i++){var method=window.analytics.methods[i];window.analytics[method]=window.analytics.factory(method)}window.analytics.load=function(a){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+a+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},window.analytics.SNIPPET_VERSION="2.0.6",
+  window.analytics.load(utils.app.regexes.origin.prod.test(window.location.hostname) ? "44yg1der8p" : "moz42de0rp");
+ </code></p>
+
+<p>  # Add Typekit for web font support
+  `
+  (function(d) {</p>
+
+<pre><code>var config = {
+  kitId: 'led3rp',
+  scriptTimeout: 3000
+},
+h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&amp;&amp;a!="complete"&amp;&amp;a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+</code></pre>
+
+<p>  })(document);
+  `</p>
+
+<p>  # Add Davy promises if available and we are using Exoskeleton
+  if Backbone.Deferred and Davy?</p>
+
+<pre><code>Backbone.Deferred = -&gt;
+  new Davy
+</code></pre>
+
+<p>  # Start application
+  Application = require(&lsquo;application&rsquo;)
+  new Application</p>
+
+<h1>Initialize the application on DOM ready event.</h1>
+
+<h1>Use jQuery if available. Otherwise use native.</h1>
+
+<p>if $?
+  $(document).ready(initialize)
+else
+  document.addEventListener(&lsquo;DOMContentLoaded&rsquo;, initialize)</p>
+
+<p>```</p>
+
+<p><strong>Tip:</strong> Don&rsquo;t forget to add the <code>'use strict'</code> as shown above to enforce strict mode on the embedded JS.</p>
+
+<p>And if you&rsquo;ve <a href="https://github.com/brunch/coffeelint-brunch">enabled CoffeeLint</a> (you are linting, aren&rsquo;t you?), you can omit linting of <code>initialize.coffee</code> by updating the <a href="https://github.com/brunch/brunch/blob/master/docs/config.md"><code>brunch-config.js</code></a> with a negative-lookahead assertion like so:</p>
+
+<p>``` javascript
+plugins: {
+  coffeelint: {</p>
+
+<pre><code>pattern: /^app\/(?!initialize).*\.coffee$/
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>Questions? Just let us know.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chaplin Collection Views Using CSS Transitions]]></title>
+    <link href="http://techblog.trunkclub.com/chaplin-collection-views-using-css-transitions/"/>
+    <updated>2014-03-02T13:43:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/chaplin-collection-views-using-css-transitions</id>
+    <content type="html"><![CDATA[<p>My team at work is currently porting an e-commerce SPA from an older framework over to <a href="https://github.com/trunkclub/brunch-with-panache">Brunch with Panache</a> (BWP), our open source development framework for web clients. Like the old framework, BWP uses both Backbone and CoffeeScript. But to make composing applications easier BWP kicks it up a notch and adds in Chaplin, giving us Collection Views.</p>
+
+<p>One of the downsides with the out-of-the-box Collection Views provided with Chaplin is that they use JavaScript-based animation to fade-in the item views once the collection has been fetched. And while this may be OK for many applications, it&rsquo;s not ideal for apps with pages which have many collection views, or for mobile user agents in general.</p>
+
+<!-- more -->
+
+
+<p>After a quick look through <a href="http://docs.chaplinjs.org/chaplin.collection_view.html">Chaplin.CollectionView</a> I noticed a property called <code>useCssAnimation</code>. The default value of this property was set to <code>false</code>. Time to search GitHub for some inspiration&hellip;</p>
+
+<p>A quick search for <code>"useCssAnimation:"</code> resulted in a number of hits. But <a href="https://github.com/molefrog/steviewhale/blob/0f665a4b77daa2023db5ebf5809c3b54b50d6931/app/views/shot/grid/shotGridView.coffee">one of them</a> in particular caught my eye, because I recognized it was using a library I&rsquo;d been experimenting with called <a href="https://github.com/daneden/animate.css">animate.css</a>. And I knew testing it out would be a cinch.</p>
+
+<p>Given BWP is geared for developer productivity, here&rsquo;s all that was needed to make the switch to use <em>animate.css</em> to replace the JS-based <code>CollectionView</code> animation behavior:</p>
+
+<ol>
+<li>With <code>jake watch:dev</code> running (and nginx pointing at the app&rsquo;s <code>public</code> directory)</li>
+<li>Run a <code>bower install --save animate.css</code></li>
+<li><p>Open the <code>collection-view.coffee</code> and add the following two properties to the object prototype:</p>
+
+<p> <code>useCssAnimation: true # flag to enable use of CSS animations</code>
+ <code>animationStartClass: "animated fadeIn" # provides CSS fade-in animation</code></p></li>
+</ol>
+
+
+<p>Test, commit and that&rsquo;s it! The project now uses CSS animations to replace the more sluggish and processor intensive JavaScript animations Chaplin provides by default.</p>
+]]></content>
+  </entry>
+  
+</feed>

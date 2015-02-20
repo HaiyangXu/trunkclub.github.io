@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ux | Trunk Club - Tech Blog]]></title>
+  <link href="http://techblog.trunkclub.com/categories/ux/atom.xml" rel="self"/>
+  <link href="http://techblog.trunkclub.com/"/>
+  <updated>2015-02-20T18:03:58+00:00</updated>
+  <id>http://techblog.trunkclub.com/</id>
+  <author>
+    <name><![CDATA[Trunk Club]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Look Inside Trunk Club Product Design by InVision]]></title>
+    <link href="http://techblog.trunkclub.com/look-inside-trunk-club-product-design-invision/"/>
+    <updated>2014-05-21T15:20:00+00:00</updated>
+    <id>http://techblog.trunkclub.com/look-inside-trunk-club-product-design-invision</id>
+    <content type="html"><![CDATA[<p><img src="../images/010-Invision_TrunkClub.jpg" alt="Members of the Trunk Club Design Team" /></p>
+
+<p>We’re excited to have been interviewed by our favorite rapid prototyping app, <a href="http://www.invisionapp.com/">InVision</a>. Read their article on the InVision Blog here: <a href="http://blog.invisionapp.com/a-look-inside-design-at-trunk-club/">A Look Inside Design at Trunk Club</a>.</p>
+
+<p>At Trunk Club, rapid prototyping plays a crucial role in our design process for both our internal and external apps. Our early iterations on products never start off perfect. InVision is the quickest way we test and learn about whether or not ideas are going down the right path.</p>
+]]></content>
+  </entry>
+  
+</feed>
